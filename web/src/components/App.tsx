@@ -1,7 +1,5 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 
-const App: FC = () => (
-    <></>
-)
+const App: FC = () => <></>;
 
 export default App;
