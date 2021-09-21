@@ -25,9 +25,8 @@ object DeskCreateCommand : Command("create", "c", "受付を追加します"), R
                     null
                 }
             }
-            println()
             if (desk != null) {
-                println("受付を追加しました (id: ${desk.id}, name: ${desk.name})")
+                printSuccess("受付を追加しました (id: ${desk.id}, name: ${desk.name})")
             } else {
                 printError(ErrorCodes.Option.Exist, "既に存在する受付名です")
             }

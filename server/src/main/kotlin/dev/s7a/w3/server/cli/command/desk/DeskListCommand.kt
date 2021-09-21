@@ -12,7 +12,6 @@ object DeskListCommand : Command("list", "l", "受付の一覧を表示します
         val desks = useDatabaseOnce {
             Desk.all().toList()
         }
-        println()
         println("受付一覧(${desks.size}):")
         desks.forEach {
             println(" - ${it.id}: ${it.name}")

@@ -18,9 +18,8 @@ object DeskDeleteCommand : Command("delete", "d", "受付を削除します"), R
             val desk = useDatabaseOnce {
                 Desk.find { Desks.name eq name }.firstOrNull()?.apply(Desk::delete)
             }
-            println()
             if (desk != null) {
-                println("受付を削除しました (id: ${desk.id}, name: ${desk.name})")
+                printSuccess("受付を削除しました (id: ${desk.id}, name: ${desk.name})")
             } else {
                 printError(ErrorCodes.Option.NotFound, "存在しない受付名です")
             }

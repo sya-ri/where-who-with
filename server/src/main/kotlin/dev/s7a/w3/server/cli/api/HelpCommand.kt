@@ -27,7 +27,6 @@ class HelpCommand(
         parent.commands.forEach(::printHelp)
         printHelp(this)
         if (args.getOrNull(parent.optionArgumentIndex)?.let { match(it) } == false) {
-            println()
             printError(ErrorCodes.NotFoundCommand, "コマンドが見つかりませんでした")
         }
     }

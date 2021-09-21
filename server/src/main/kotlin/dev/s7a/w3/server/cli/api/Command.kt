@@ -27,6 +27,14 @@ abstract class Command(
     fun match(name: String) = fullName.equals(name, true) || shortName.equals(name, true)
 
     /**
+     * 成功メッセージを表示する
+     * @param message メッセージ
+     */
+    fun printSuccess(message: String) {
+        println("${ShellColor.Green}SUCCESS: $message${ShellColor.Reset}")
+    }
+
+    /**
      * エラーを表示する
      * @param errorCode エラーコード
      * @param message エラーの本文
