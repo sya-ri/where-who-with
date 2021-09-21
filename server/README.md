@@ -1,5 +1,18 @@
 # サーバー
 
+## 使い方
+
+```shell
+$ java -jar w3server.jar
+```
+
+```
+Usage: java -jar w3server.jar <Option>
+Options:
+    start, s -> サーバーを起動します
+    help, h -> コマンドヘルプを表示します
+```
+
 ## 設計
 
 ### データベース
