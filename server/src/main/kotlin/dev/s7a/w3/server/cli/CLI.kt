@@ -2,6 +2,7 @@ package dev.s7a.w3.server.cli
 
 import dev.s7a.w3.server.cli.command.Command
 import dev.s7a.w3.server.cli.command.StartCommand
+import dev.s7a.w3.server.cli.command.VersionCommand
 
 /**
  * 実行を管理するクラス
@@ -12,6 +13,7 @@ object CLI {
      */
     private val commands = listOf(
         StartCommand,
+        VersionCommand,
         HelpCommand
     )
 

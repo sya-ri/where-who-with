@@ -1,14 +1,22 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.palantir.gradle.gitversion.VersionDetails
+import groovy.lang.Closure
 
 plugins {
     kotlin("jvm") version "1.5.31"
     id("org.jmailen.kotlinter") version "3.5.0"
     id("com.github.johnrengelman.shadow") version "7.0.0"
     id("com.github.ben-manes.versions") version "0.39.0"
+    id("com.palantir.git-version") version "0.12.3"
     application
 }
 
+apply<W3Plugin>()
+
 group = "dev.s7a.w3.server"
+
+val versionDetails: Closure<VersionDetails> by extra
+val details = versionDetails()
 
 repositories {
     mavenCentral()
@@ -30,6 +38,13 @@ dependencies {
 
 application {
     mainClass.set("$group.MainKt")
+}
+
+tasks.withType<GenerateVersionFileTask> {
+    val lastTag = details.lastTag
+    val commitDistance = details.commitDistance
+    val isCleanTag = details.isCleanTag
+    version.set("$lastTag${if (commitDistance == 0) "" else "+$commitDistance"}${if (isCleanTag) "" else ".dirty"}")
 }
 
 tasks.withType<ShadowJar> {
