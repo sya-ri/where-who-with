@@ -1,4 +1,7 @@
-package dev.s7a.w3.server.cli.command
+package dev.s7a.w3.server.cli.api
+
+import dev.s7a.w3.server.cli.util.ShellColor
+import kotlin.system.exitProcess
 
 /**
  * コマンド
@@ -9,12 +12,12 @@ package dev.s7a.w3.server.cli.command
 abstract class Command(
     val fullName: String,
     val shortName: String,
-    val description: String
+    val description: String,
 ) {
     /**
      * コマンドを実行する
      */
-    abstract fun execute()
+    abstract fun execute(args: Array<String>)
 
     /**
      * 名前が一致しているか判定する
@@ -22,4 +25,14 @@ abstract class Command(
      * @return [fullName] か [shortName] に一致していれば true
      */
     fun match(name: String) = fullName.equals(name, true) || shortName.equals(name, true)
+
+    /**
+     * エラーを表示する
+     * @param errorCode エラーコード
+     * @param message エラーの本文
+     */
+    fun printError(errorCode: Int, message: String) {
+        println("${ShellColor.Red}ERROR: $message${ShellColor.Reset}")
+        exitProcess(errorCode)
+    }
 }
