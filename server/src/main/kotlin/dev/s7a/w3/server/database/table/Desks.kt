@@ -9,5 +9,5 @@ object Desks : IntIdTable("desks") {
     /**
      * 名前
      */
-    val name = varchar("name", 255)
+    val name = varchar("name", 255).uniqueIndex()
 }
