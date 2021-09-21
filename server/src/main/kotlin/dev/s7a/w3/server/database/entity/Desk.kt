@@ -15,5 +15,5 @@ class Desk(id: EntityID<Int>) : IntEntity(id) {
     /**
      * 受付名
      */
-    val name by Desks.name
+    var name by Desks.name
 }
