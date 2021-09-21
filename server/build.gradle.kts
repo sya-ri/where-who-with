@@ -15,10 +15,17 @@ repositories {
 }
 
 val shadowImplementation: Configuration by configurations.creating
+val shadowRuntimeOnly: Configuration by configurations.creating
 configurations["implementation"].extendsFrom(shadowImplementation)
+configurations["runtimeOnly"].extendsFrom(shadowRuntimeOnly)
 
 dependencies {
     shadowImplementation(kotlin("stdlib"))
+    shadowImplementation("org.jetbrains.exposed:exposed-core:0.34.2")
+    shadowImplementation("org.jetbrains.exposed:exposed-dao:0.34.2")
+    shadowImplementation("org.jetbrains.exposed:exposed-jdbc:0.34.2")
+    shadowImplementation("org.jetbrains.exposed:exposed-java-time:0.34.2")
+    shadowRuntimeOnly("org.xerial:sqlite-jdbc:3.36.0.2")
 }
 
 application {
@@ -26,6 +33,6 @@ application {
 }
 
 tasks.withType<ShadowJar> {
-    configurations = listOf(shadowImplementation)
+    configurations = listOf(shadowImplementation, shadowRuntimeOnly)
     archiveClassifier.set("")
 }
