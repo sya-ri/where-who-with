@@ -26,6 +26,8 @@ class HelpCommand(
         println("Options:")
         parent.commands.forEach(::printHelp)
         printHelp(this)
+        println("Flags:")
+        Flag.list.forEach(::printHelp)
         if (args.getOrNull(parent.optionArgumentIndex)?.let { match(it) } == false) {
             printError(ErrorCodes.NotFoundCommand, "コマンドが見つかりませんでした")
         }
@@ -36,5 +38,12 @@ class HelpCommand(
      */
     private fun printHelp(command: Command) {
         println("    ${command.fullName}, ${command.shortName} -> ${command.description}")
+    }
+
+    /**
+     * フラグヘルプを表示する
+     */
+    private fun printHelp(flag: Flag) {
+        println("    ${flag.fullName}, ${flag.shortName} -> ${flag.description}")
     }
 }

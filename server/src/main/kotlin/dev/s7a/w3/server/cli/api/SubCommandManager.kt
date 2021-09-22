@@ -10,6 +10,20 @@ interface SubCommandManager : RequireOption {
     val commands: List<Command>
 
     /**
+     * フラグオプションの処理
+     * - デバッグモードの切り替え
+     * @param args 実行引数
+     * @return フラグオプションを削除した実行引数
+     */
+    fun processFlag(args: Array<String>): Array<String> {
+        val (flagNames, argsIgnoreFlag) = args.partition { it.startsWith('-') }
+        Flag.list.forEach { flag ->
+            flag.execute(flagNames.any(flag::match))
+        }
+        return argsIgnoreFlag.toTypedArray()
+    }
+
+    /**
      * コマンドを処理する
      */
     fun execute(args: Array<String>) {

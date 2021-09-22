@@ -20,7 +20,7 @@ abstract class Command(
     abstract fun execute(args: Array<String>)
 
     /**
-     * 名前が一致しているか判定する
+     * 名前が一致しているか判定する。ただし、大文字小文字を区別しない
      * @param name 名前
      * @return [fullName] か [shortName] に一致していれば true
      */
