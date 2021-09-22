@@ -10,7 +10,7 @@ import dev.s7a.w3.server.database.table.Desks
 /**
  * 受付を追加するコマンド
  */
-object DeskCreateCommand : Command("create", "c", "受付を追加します"), RequireOption {
+object DeskCreateCommand : Command("create", "受付を追加します"), RequireOption {
     override val optionArgumentIndex = 2
 
     override fun execute(args: Array<String>) {

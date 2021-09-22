@@ -10,7 +10,7 @@ import dev.s7a.w3.server.database.table.Desks
 /**
  * 受付を削除するコマンド
  */
-object DeskDeleteCommand : Command("delete", "d", "受付を削除します"), RequireOption {
+object DeskDeleteCommand : Command("delete", "受付を削除します"), RequireOption {
     override val optionArgumentIndex = 2
 
     override fun execute(args: Array<String>) {

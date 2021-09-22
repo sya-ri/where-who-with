@@ -7,7 +7,7 @@ import dev.s7a.w3.server.cli.ErrorCodes
  */
 class HelpCommand(
     private val parent: SubCommandManager
-) : Command("help", "h", "コマンドヘルプを表示します") {
+) : Command("help", "コマンドヘルプを表示します") {
     companion object {
         /**
          * プログラム名
@@ -37,7 +37,7 @@ class HelpCommand(
      * コマンドヘルプを表示する
      */
     private fun printHelp(command: Command) {
-        println("    ${command.fullName}, ${command.shortName} -> ${command.description}")
+        println("    ${command.fullName} -> ${command.description}")
     }
 
     /**

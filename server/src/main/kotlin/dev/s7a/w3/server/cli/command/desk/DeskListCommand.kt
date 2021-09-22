@@ -7,7 +7,7 @@ import dev.s7a.w3.server.database.entity.Desk
 /**
  * 受付の一覧を表示するコマンド
  */
-object DeskListCommand : Command("list", "l", "受付の一覧を表示します") {
+object DeskListCommand : Command("list", "受付の一覧を表示します") {
     override fun execute(args: Array<String>) {
         val desks = useDatabaseOnce {
             Desk.all().toList()

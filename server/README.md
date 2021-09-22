@@ -9,10 +9,10 @@ $ java -jar w3server.jar
 ```
 Usage: java -jar w3server.jar <Option>
 Options:
-    start, s -> サーバーを起動します
-    desk, d -> 受付に関するコマンドです
-    version, v -> バージョンを表示します
-    help, h -> コマンドヘルプを表示します
+    start -> サーバーを起動します
+    desk -> 受付に関するコマンドです
+    version -> バージョンを表示します
+    help -> コマンドヘルプを表示します
 Flags:
     --debug, -D -> デバッグログを表示します
 ```

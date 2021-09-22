@@ -9,7 +9,7 @@ import dev.s7a.w3.server.cli.command.desk.DeskListCommand
 /**
  * 受付に関するコマンド
  */
-object DeskCommand : Command("desk", "d", "受付に関するコマンドです"), SubCommandManager {
+object DeskCommand : Command("desk", "受付に関するコマンドです"), SubCommandManager {
     override val commands = listOf(
         DeskCreateCommand,
         DeskDeleteCommand,
