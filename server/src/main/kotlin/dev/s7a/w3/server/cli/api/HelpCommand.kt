@@ -23,7 +23,7 @@ class HelpCommand(
             append("<Option>")
         }
         println("Usage: $programName $optionName")
-        println("Options:")
+        println("Commands:")
         parent.commands.forEach(::printHelp)
         printHelp(this)
         println("Flags:")

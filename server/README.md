@@ -8,7 +8,7 @@ $ java -jar w3server.jar
 
 ```
 Usage: java -jar w3server.jar <Option>
-Options:
+Commands:
     start -> サーバーを起動します
     desk -> 受付に関するコマンドです
     version -> バージョンを表示します
