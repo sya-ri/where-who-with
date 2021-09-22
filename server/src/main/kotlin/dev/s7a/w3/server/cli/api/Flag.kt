@@ -33,5 +33,19 @@ abstract class Flag(
         val list = listOf(
             DebugFlag
         )
+
+        /**
+         * フラグオプションの処理
+         * - デバッグモードの切り替え
+         * @param args 実行引数
+         * @return フラグオプションを削除した実行引数
+         */
+        fun processFlag(args: Array<String>): Array<String> {
+            val (flagNames, argsIgnoreFlag) = args.partition { it.startsWith('-') }
+            list.forEach { flag ->
+                flag.execute(flagNames.any(flag::match))
+            }
+            return argsIgnoreFlag.toTypedArray()
+        }
     }
 }
