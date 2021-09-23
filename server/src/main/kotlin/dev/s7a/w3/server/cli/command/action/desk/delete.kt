@@ -1,6 +1,6 @@
 package dev.s7a.w3.server.cli.command.action.desk
 
-import dev.s7a.w3.server.cli.ErrorCodes
+import dev.s7a.w3.server.cli.ErrorCode
 import dev.s7a.w3.server.cli.api.ExecutionPlatform
 import dev.s7a.w3.server.cli.util.useDatabaseOnce
 import dev.s7a.w3.server.database.entity.Desk
@@ -18,7 +18,7 @@ fun ExecutionPlatform.deskDelete(_name: String?) {
         if (desk != null) {
             printSuccess("受付を削除しました (id: ${desk.id}, name: ${desk.name})")
         } else {
-            printError(ErrorCodes.Option.NotFound, "存在しない受付名です")
+            printError(ErrorCode.OptionNotFound, "存在しない受付名です")
         }
     }
 }

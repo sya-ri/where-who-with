@@ -1,6 +1,6 @@
 package dev.s7a.w3.server.cli.command.action.desk
 
-import dev.s7a.w3.server.cli.ErrorCodes
+import dev.s7a.w3.server.cli.ErrorCode
 import dev.s7a.w3.server.cli.api.ExecutionPlatform
 import dev.s7a.w3.server.cli.util.useDatabaseOnce
 import dev.s7a.w3.server.database.entity.Desk
@@ -25,7 +25,7 @@ fun ExecutionPlatform.deskCreate(_name: String?) {
         if (desk != null) {
             printSuccess("受付を追加しました (id: ${desk.id}, name: ${desk.name})")
         } else {
-            printError(ErrorCodes.Option.Exist, "既に存在する受付名です")
+            printError(ErrorCode.OptionExist, "既に存在する受付名です")
         }
     }
 }

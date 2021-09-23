@@ -1,6 +1,6 @@
 package dev.s7a.w3.server.cli.api
 
-import dev.s7a.w3.server.cli.ErrorCodes
+import dev.s7a.w3.server.cli.ErrorCode
 import kotlin.system.exitProcess
 
 /**
@@ -106,7 +106,7 @@ sealed class Command(
             } else {
                 printHelp()
                 if (commandName != null) {
-                    platform.printError(ErrorCodes.NotFoundCommand, "コマンドが見つかりませんでした")
+                    platform.printError(ErrorCode.NotFoundCommand, "コマンドが見つかりませんでした")
                 }
             }
         }
@@ -157,7 +157,7 @@ sealed class Command(
                         }
                     }
                 } else {
-                    platform.printError(ErrorCodes.Platform.AlreadyInteract, "既に対話モードです")
+                    platform.printError(ErrorCode.PlatformAlreadyInteract, "既に対話モードです")
                 }
             }
         }
