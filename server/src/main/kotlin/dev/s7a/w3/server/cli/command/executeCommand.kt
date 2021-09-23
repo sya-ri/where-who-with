@@ -20,8 +20,8 @@ fun executeCommand(args: Array<String>) {
             register("delete", "受付名", "受付を削除します", ExecutionPlatform::deskDelete)
             register("list", "受付の一覧を表示します", ExecutionPlatform::deskList)
         }
-        interact("interact", "対話モードを開始します")
         register("version", "バージョンを表示します", ExecutionPlatform::version)
+        interact("interact", "exit", "対話モードを開始します")
     }
     rootCommand.execute(ExecutionPlatform.Command, args, 0)
 }
