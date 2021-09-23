@@ -45,10 +45,15 @@ sealed class Command(
         private val _commands = mutableListOf<Command>()
 
         /**
+         * ヘルプメッセージを表示するコマンド
+         */
+        private val helpMessageCommand = Action.Help(this)
+
+        /**
          * サブコマンド
          */
         val commands
-            get() = _commands.toList()
+            get() = _commands.toList() + helpMessageCommand
 
         /**
          * 単純な処理を実行するコマンドを追加する
@@ -91,34 +96,13 @@ sealed class Command(
             _commands.add(Container(this, name, description).apply(action))
         }
 
-        /**
-         * コマンドヘルプを表示する
-         * @param platform 実行環境
-         */
-        private fun printHelp(platform: ExecutionPlatform) {
-            if (platform is ExecutionPlatform.Command) {
-                println("Usage: $runName <Command>")
-            }
-            println("Commands:")
-            _commands.forEach {
-                println("    ${it.getHelpMessage(platform)}")
-            }
-            println("    help -> コマンドヘルプを表示します")
-            if (platform is ExecutionPlatform.Command) {
-                println("Flags:")
-                Flag.list.forEach {
-                    println("    ${it.fullName}, ${it.shortName} -> ${it.description}")
-                }
-            }
-        }
-
         override fun execute(platform: ExecutionPlatform, args: Array<String>, index: Int) {
             val commandName = args.getOrNull(index)
-            val command = _commands.firstOrNull { it.name.equals(commandName, true) }
+            val command = commands.firstOrNull { it.name.equals(commandName, true) }
             if (command != null) {
                 command.execute(platform, args, index + 1)
             } else {
-                printHelp(platform)
+                helpMessageCommand.execute(platform, args, index)
                 if (commandName != null) {
                     platform.printError(ErrorCode.NotFoundCommand, "コマンドが見つかりませんでした")
                 }
@@ -214,6 +198,27 @@ sealed class Command(
                     }
                 } else {
                     platform.printError(ErrorCode.PlatformAlreadyInteract, "既に対話モードです")
+                }
+            }
+        }
+
+        /**
+         * ヘルプメッセージ
+         */
+        class Help(parent: Container) : Action(parent, "help", "コマンドヘルプを表示します") {
+            override fun execute(platform: ExecutionPlatform, args: Array<String>, index: Int) {
+                if (platform is ExecutionPlatform.Command) {
+                    println("Usage: $runName <Command>")
+                }
+                println("Commands:")
+                parent!!.commands.forEach {
+                    println("    ${it.getHelpMessage(platform)}")
+                }
+                if (platform is ExecutionPlatform.Command) {
+                    println("Flags:")
+                    Flag.list.forEach {
+                        println("    ${it.fullName}, ${it.shortName} -> ${it.description}")
+                    }
                 }
             }
         }
