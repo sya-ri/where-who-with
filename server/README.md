@@ -7,10 +7,11 @@ $ java -jar w3server.jar
 ```
 
 ```
-Usage: java -jar w3server.jar <Option>
+Usage: java -jar w3server.jar <Command>
 Commands:
     start -> サーバーを起動します
     desk -> 受付に関するコマンドです
+    interact -> 対話モードを開始します
     version -> バージョンを表示します
     help -> コマンドヘルプを表示します
 Flags:

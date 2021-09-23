@@ -33,4 +33,14 @@ object ErrorCodes {
          */
         const val NotFound = 5
     }
+
+    /**
+     * 実行環境に関するエラー
+     */
+    object Platform {
+        /**
+         * 既に対話モードで実行されている
+         */
+        const val AlreadyInteract = 6
+    }
 }

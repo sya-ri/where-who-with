@@ -1,7 +1,7 @@
 package dev.s7a.w3.server.cli.command.action.desk
 
 import dev.s7a.w3.server.cli.ErrorCodes
-import dev.s7a.w3.server.cli.util.printError
+import dev.s7a.w3.server.cli.api.ExecutionPlatform
 import dev.s7a.w3.server.database.table.Desks
 
 /**
@@ -9,7 +9,7 @@ import dev.s7a.w3.server.database.table.Desks
  * @param name 受付名
  * @param onSuccess 成功時の処理
  */
-inline fun checkDeskName(name: String?, onSuccess: (String) -> Unit) {
+inline fun ExecutionPlatform.checkDeskName(name: String?, onSuccess: (String) -> Unit) {
     if (name != null) {
         if (name.length <= Desks.nameLength) {
             onSuccess(name)
