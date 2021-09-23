@@ -35,7 +35,8 @@ dependencies {
     shadowImplementation("org.jetbrains.exposed:exposed-java-time:0.34.2")
     shadowRuntimeOnly("org.xerial:sqlite-jdbc:3.36.0.3")
     shadowImplementation("ch.qos.logback:logback-classic:1.2.6")
-    shadowImplementation("org.jline:jline:3.20.0")
+    shadowImplementation("org.jline:jline-reader:3.20.0")
+    shadowImplementation("org.jline:jline-builtins:3.20.0")
 }
 
 application {
