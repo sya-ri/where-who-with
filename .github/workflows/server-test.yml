@@ -1,0 +1,26 @@
+on:
+ push:
+   paths:
+     - 'server/**'
+     - '.github/workflows/server-test.yml'
+ pull_request:
+   paths:
+     - 'server/**'
+     - '.github/workflows/server-test.yml'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+     - name: Cache
+       uses: actions/cache@v2
+       with:
+         path: ~/.gradle/caches
+         key: ${{ runner.os }}-gradle-${{ hashFiles('server/**/*.gradle.kts') }}
+     - name: Setup Java
+       uses: actions/setup-java@v1
+       with:
+         java-version: 1.8
+     - name: Test
+       run: cd server && ./gradlew test
