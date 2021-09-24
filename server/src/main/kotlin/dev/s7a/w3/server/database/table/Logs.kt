@@ -1,7 +1,7 @@
 package dev.s7a.w3.server.database.table
 
 import org.jetbrains.exposed.dao.id.IntIdTable
-import org.jetbrains.exposed.sql.`java-time`.datetime
+import org.jetbrains.exposed.sql.kotlin.datetime.timestamp
 
 /**
  * 入退出記録テーブル
@@ -20,10 +20,10 @@ object Logs : IntIdTable("logs") {
     /**
      * エリアに入った日時
      */
-    val joinedAt = datetime("joined_at")
+    val joinedAt = timestamp("joined_at")
 
     /**
      * エリアから出た日時
      */
-    val leaveAt = datetime("leave_at").nullable()
+    val leaveAt = timestamp("leave_at").nullable()
 }

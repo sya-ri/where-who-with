@@ -1,9 +1,11 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.palantir.gradle.gitversion.VersionDetails
 import groovy.lang.Closure
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.5.31"
+    kotlin("plugin.serialization") version "1.5.31"
     id("org.jmailen.kotlinter") version "3.6.0"
     id("com.github.johnrengelman.shadow") version "7.0.0"
     id("com.github.ben-manes.versions") version "0.39.0"
@@ -29,14 +31,25 @@ configurations["runtimeOnly"].extendsFrom(shadowRuntimeOnly)
 
 dependencies {
     shadowImplementation(kotlin("stdlib"))
-    shadowImplementation("org.jetbrains.exposed:exposed-core:0.34.2")
-    shadowImplementation("org.jetbrains.exposed:exposed-dao:0.34.2")
-    shadowImplementation("org.jetbrains.exposed:exposed-jdbc:0.34.2")
-    shadowImplementation("org.jetbrains.exposed:exposed-java-time:0.34.2")
+    shadowImplementation("org.jetbrains.exposed:exposed-core:0.35.1")
+    shadowImplementation("org.jetbrains.exposed:exposed-dao:0.35.1")
+    shadowImplementation("org.jetbrains.exposed:exposed-jdbc:0.35.1")
+    shadowImplementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.35.1")
     shadowRuntimeOnly("org.xerial:sqlite-jdbc:3.36.0.3")
     shadowImplementation("ch.qos.logback:logback-classic:1.2.6")
     shadowImplementation("org.jline:jline-reader:3.20.0")
     shadowImplementation("org.jline:jline-builtins:3.20.0")
+    shadowImplementation("io.ktor:ktor-server-cio:1.6.3")
+    shadowImplementation("io.ktor:ktor-serialization:1.6.3")
+    shadowImplementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
+    testImplementation(kotlin("test"))
+    testImplementation("io.ktor:ktor-server-test-host:1.6.3")
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
+    }
 }
 
 application {

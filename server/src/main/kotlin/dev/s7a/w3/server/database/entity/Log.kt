@@ -15,20 +15,20 @@ class Log(id: EntityID<Int>) : IntEntity(id) {
     /**
      * ユーザー
      */
-    val user by User referrersOn Logs.userId
+    var user by User referencedOn Logs.userId
 
     /**
      * エリア
      */
-    val area by Area referrersOn Logs.areaId
+    var area by Area referencedOn Logs.areaId
 
     /**
      * エリアに入った日時
      */
-    val joinedAt by Logs.joinedAt
+    var joinedAt by Logs.joinedAt
 
     /**
      * エリアから出た日時
      */
-    val leaveAt by Logs.leaveAt
+    var leaveAt by Logs.leaveAt
 }

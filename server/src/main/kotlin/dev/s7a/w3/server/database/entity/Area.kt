@@ -15,5 +15,5 @@ class Area(id: EntityID<Int>) : IntEntity(id) {
     /**
      * エリア名
      */
-    val name by Areas.name
+    var name by Areas.name
 }

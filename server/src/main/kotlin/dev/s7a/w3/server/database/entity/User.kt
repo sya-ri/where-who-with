@@ -15,5 +15,5 @@ class User(id: EntityID<Int>) : IntEntity(id) {
     /**
      * 受付
      */
-    val desk by Desk referrersOn Users.deskId
+    var desk by Desk referencedOn Users.deskId
 }
