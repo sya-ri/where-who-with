@@ -1,0 +1,105 @@
+openapi: 3.0.3
+info:
+  title: w3server
+  description: where-who-with is COVID-19 Contact-Confirming Application For @gKokasai.
+  version: 1.0.0
+externalDocs:
+  description: GitHub
+  url: https://github.com/sya-ri/where-who-with
+security: []
+paths:
+  /user:
+    post:
+      tags:
+        - api
+      summary: 新しいユーザーを作成する
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRequest"
+      responses:
+        200:
+          description: ユーザーの作成に成功しました
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        400:
+          description: |
+            - 存在しない受付です
+  /log/join:
+    post:
+      tags:
+        - api
+      summary: エリアに入った日時を記録する
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LogRequest"
+      responses:
+        200:
+          description: 日時の記録に成功しました
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogResponse"
+        400:
+          description: |
+            - 存在しないユーザーです
+            - 存在しないエリアです
+  /log/leave:
+    post:
+      tags:
+        - api
+      summary: エリアから出た日時を記録する
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LogRequest"
+      responses:
+        200:
+          description: 日時の記録に成功しました
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogResponse"
+        400:
+          description: |
+            - 存在しないユーザーです
+            - 存在しないエリアです
+components:
+  schemas:
+    UserRequest:
+      type: object
+      properties:
+        desk_id:
+          type: integer
+          description: 受付ID
+    UserResponse:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          description: 作成したユーザーID
+    LogRequest:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          description: ユーザーID
+        area_id:
+          type: integer
+          description: エリアID
+    LogResponse:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          description: 日時
