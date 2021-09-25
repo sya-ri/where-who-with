@@ -29,3 +29,20 @@ jobs:
          java-version: ${{ matrix.java }}
      - name: Test
        run: cd server && ./gradlew test
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('server/**/*.gradle.kts') }}
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 8
+      - name: Lint
+        run: cd server && ./gradlew lintKotlin
