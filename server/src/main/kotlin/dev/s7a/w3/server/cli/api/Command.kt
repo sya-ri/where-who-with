@@ -3,8 +3,10 @@ package dev.s7a.w3.server.cli.api
 import dev.s7a.w3.server.cli.ErrorCode
 import org.jline.builtins.Completers.TreeCompleter
 import org.jline.reader.Completer
+import org.jline.reader.EndOfFileException
 import org.jline.reader.LineReader
 import org.jline.reader.LineReaderBuilder
+import org.jline.reader.UserInterruptException
 import org.jline.reader.impl.DefaultParser
 import kotlin.system.exitProcess
 
@@ -195,7 +197,13 @@ sealed class Command(
                     println("対話モードを開始します")
                     val lineReader = getLineReader()
                     while (true) {
-                        val input = lineReader.readLine(">> ").trim()
+                        val input = try {
+                            lineReader.readLine(">> ").trim()
+                        } catch (ex: UserInterruptException) {
+                            return
+                        } catch (ex: EndOfFileException) {
+                            return
+                        }
                         if (input.isEmpty()) continue
                         when (input) {
                             exitName -> {
