@@ -1,16 +1,15 @@
 
 import dev.s7a.w3.server.database.entity.Log
 import dev.s7a.w3.server.database.entity.User
-import dev.s7a.w3.server.database.table.Logs
 import dev.s7a.w3.server.model.LogRequest
 import dev.s7a.w3.server.model.LogResponse
 import dev.s7a.w3.server.model.UserRequest
 import dev.s7a.w3.server.model.UserResponse
-import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.transactions.transaction
 import util.factory.AreaFactory
 import util.factory.DeskFactory
 import util.factory.UserFactory
+import util.find
 import util.http.assertOK
 import util.http.jsonBody
 import util.http.jsonContent
@@ -54,12 +53,7 @@ class HttpRequestTest {
             assertOK(response)
             val content = response.jsonContent<LogResponse>()
             val log = transaction {
-                Log.find {
-                    (Logs.userId eq user.id) and
-                        (Logs.areaId eq area.id) and
-                        (Logs.joinedAt eq content.date) and
-                        (Logs.leaveAt eq null)
-                }.firstOrNull()
+                Log.find(user, area, content.date, null).firstOrNull()
             }
             assertNotNull(log)
             content.date
@@ -70,12 +64,7 @@ class HttpRequestTest {
             assertOK(response)
             val content = response.jsonContent<LogResponse>()
             val log = transaction {
-                Log.find {
-                    (Logs.userId eq user.id) and
-                        (Logs.areaId eq area.id) and
-                        (Logs.joinedAt eq joinedAt) and
-                        (Logs.leaveAt eq content.date)
-                }.firstOrNull()
+                Log.find(user, area, joinedAt, content.date).firstOrNull()
             }
             assertNotNull(log)
         }
