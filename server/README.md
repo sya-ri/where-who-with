@@ -32,6 +32,15 @@ gradlew.bat build
 ./gradlew build
 ```
 
+#### テスト
+
+```shell
+gradlew.bat test
+
+# Mac, Linux
+./gradlew test
+```
+
 #### 依存関係のバージョン確認
 
 ```shell
