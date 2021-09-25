@@ -1,6 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.palantir.gradle.gitversion.VersionDetails
 import groovy.lang.Closure
+import org.hidetake.gradle.swagger.generator.GenerateSwaggerUI
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -10,6 +11,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.0.0"
     id("com.github.ben-manes.versions") version "0.39.0"
     id("com.palantir.git-version") version "0.12.3"
+    id("org.hidetake.swagger.generator") version "2.18.2"
     application
 }
 
@@ -44,6 +46,7 @@ dependencies {
     shadowImplementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
     testImplementation(kotlin("test"))
     testImplementation("io.ktor:ktor-server-test-host:1.6.3")
+    swaggerUI("org.webjars:swagger-ui:3.52.1")
 }
 
 tasks.withType<KotlinCompile> {
@@ -63,7 +66,19 @@ tasks.withType<GenerateVersionFileTask> {
     version.set("$lastTag${if (commitDistance == 0) "" else "+$commitDistance"}${if (isCleanTag) "" else ".dirty"}")
 }
 
+val generateSwaggerUITask = tasks.named<GenerateSwaggerUI>("generateSwaggerUI") {
+    inputFile = file("openapi.yaml")
+}
+
+extensions.getByType<SourceSetContainer>().named(SourceSet.MAIN_SOURCE_SET_NAME) {
+    resources.srcDir(generateSwaggerUITask) // API ドキュメント
+}
+
 tasks.withType<ShadowJar> {
     configurations = listOf(shadowImplementation, shadowRuntimeOnly)
     archiveClassifier.set("")
+}
+
+tasks.named("build") {
+    dependsOn("generateSwaggerUI")
 }
