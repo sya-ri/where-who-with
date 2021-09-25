@@ -2,6 +2,9 @@ package dev.s7a.w3.server.cli.command
 
 import dev.s7a.w3.server.cli.api.Command.Companion.registerCommand
 import dev.s7a.w3.server.cli.api.ExecutionPlatform
+import dev.s7a.w3.server.cli.command.action.area.areaCreate
+import dev.s7a.w3.server.cli.command.action.area.areaDelete
+import dev.s7a.w3.server.cli.command.action.area.areaList
 import dev.s7a.w3.server.cli.command.action.desk.deskCreate
 import dev.s7a.w3.server.cli.command.action.desk.deskDelete
 import dev.s7a.w3.server.cli.command.action.desk.deskList
@@ -19,6 +22,11 @@ fun executeCommand(args: Array<String>) {
             register("create", "受付名", "受付を追加します", ExecutionPlatform::deskCreate)
             register("delete", "受付名", "受付を削除します", ExecutionPlatform::deskDelete)
             register("list", "受付の一覧を表示します", ExecutionPlatform::deskList)
+        }
+        container("area", "エリアに関するコマンドです") {
+            register("create", "エリア名", "エリアを追加します", ExecutionPlatform::areaCreate)
+            register("delete", "エリア名", "エリアを削除します", ExecutionPlatform::areaDelete)
+            register("list", "エリアの一覧を表示します", ExecutionPlatform::areaList)
         }
         register("version", "バージョンを表示します", ExecutionPlatform::version)
         interact("interact", "exit", "対話モードを開始します")

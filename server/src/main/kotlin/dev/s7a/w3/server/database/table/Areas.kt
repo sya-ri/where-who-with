@@ -7,6 +7,11 @@ import org.jetbrains.exposed.dao.id.IntIdTable
  */
 object Areas : IntIdTable("areas") {
     /**
+     * 名前の文字数
+     */
+    const val nameLength = 255
+
+    /**
      * 名前
      */
     val name = varchar("name", 255)
