@@ -1,4 +1,3 @@
-
 import dev.s7a.w3.server.database.entity.Log
 import dev.s7a.w3.server.database.entity.User
 import dev.s7a.w3.server.model.LogRequest
