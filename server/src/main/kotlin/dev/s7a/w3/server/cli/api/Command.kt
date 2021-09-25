@@ -175,7 +175,7 @@ sealed class Command(
                                 TreeCompleter.node(it.name)
                             }
                         }
-                    }.toTypedArray() + TreeCompleter.node("help")
+                    }.toTypedArray()
                 }
                 return TreeCompleter(*parent.getNodeList())
             }
