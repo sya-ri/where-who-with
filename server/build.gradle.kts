@@ -77,6 +77,14 @@ dependencies {
 }
 
 /*
+ * Java 互換性の設定
+ */
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+/*
  * @OptIn アノテーションを使えるようにする
  */
 tasks.withType<KotlinCompile> {
