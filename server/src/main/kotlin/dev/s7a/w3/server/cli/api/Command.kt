@@ -17,7 +17,7 @@ import kotlin.system.exitProcess
  * @param description 説明文
  */
 sealed class Command(
-    protected val parent: Container?,
+    protected open val parent: Container?,
     val name: String,
     protected val description: String,
 ) {
@@ -25,7 +25,7 @@ sealed class Command(
      * 実行名
      */
     val runName: String
-        get() = "${if (parent != null) "${parent.runName} " else ""}$name"
+        get() = "${parent?.let { "${it.runName} " } ?: ""}$name"
 
     /**
      * ヘルプメッセージ
@@ -125,7 +125,7 @@ sealed class Command(
     /**
      * 処理を実行するコマンド
      */
-    sealed class Action(parent: Container, name: String, description: String) : Command(parent, name, description) {
+    sealed class Action(override val parent: Container, name: String, description: String) : Command(parent, name, description) {
         /**
          * 単純な処理
          */
@@ -177,7 +177,7 @@ sealed class Command(
                         }
                     }.toTypedArray() + TreeCompleter.node("help")
                 }
-                return TreeCompleter(*parent!!.getNodeList())
+                return TreeCompleter(*parent.getNodeList())
             }
 
             /**
@@ -210,7 +210,7 @@ sealed class Command(
                                 exitProcess(0)
                             }
                             else -> {
-                                parent!!.execute(ExecutionPlatform.Interact, input.split("\\s+".toRegex()).toTypedArray(), 0)
+                                parent.execute(ExecutionPlatform.Interact, input.split("\\s+".toRegex()).toTypedArray(), 0)
                             }
                         }
                     }
@@ -229,7 +229,7 @@ sealed class Command(
                     println("Usage: $runName <Command>")
                 }
                 println("Commands:")
-                parent!!.commands.forEach {
+                parent.commands.forEach {
                     println("    ${it.getHelpMessage(platform)}")
                 }
                 if (platform is ExecutionPlatform.Command) {
