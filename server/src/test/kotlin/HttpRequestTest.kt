@@ -53,7 +53,7 @@ class HttpRequestTest {
             assertOK(response)
             val content = response.jsonContent<LogResponse>()
             val log = transaction {
-                Log.find(user, area, content.date, null).firstOrNull()
+                Log.find(user, area, content.date, null).limit(1).firstOrNull()
             }
             assertNotNull(log)
             content.date
@@ -64,7 +64,7 @@ class HttpRequestTest {
             assertOK(response)
             val content = response.jsonContent<LogResponse>()
             val log = transaction {
-                Log.find(user, area, joinedAt, content.date).firstOrNull()
+                Log.find(user, area, joinedAt, content.date).limit(1).firstOrNull()
             }
             assertNotNull(log)
         }

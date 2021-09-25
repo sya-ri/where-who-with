@@ -31,7 +31,7 @@ suspend fun PipelineContext<Unit, ApplicationCall>.logJoinPost() {
             (Logs.userId eq user.id.value) and
                 (Logs.areaId eq area.id.value) and
                 (Logs.leaveAt eq null)
-        }.singleOrNull()?.apply {
+        }.limit(1).firstOrNull()?.apply {
             this.joinedAt = Clock.System.now()
         } ?: Log.new {
             this.user = user

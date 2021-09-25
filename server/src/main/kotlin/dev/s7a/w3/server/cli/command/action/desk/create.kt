@@ -13,7 +13,7 @@ import dev.s7a.w3.server.database.table.Desks
 fun ExecutionPlatform.deskCreate(_name: String?) {
     checkDeskName(_name) { name ->
         val desk = useDatabaseOnce {
-            val notExist = Desk.find { Desks.name eq name }.empty()
+            val notExist = Desk.find { Desks.name eq name }.limit(1).empty()
             if (notExist) {
                 Desk.new {
                     this.name = name

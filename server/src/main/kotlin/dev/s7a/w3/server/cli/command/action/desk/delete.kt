@@ -13,7 +13,7 @@ import dev.s7a.w3.server.database.table.Desks
 fun ExecutionPlatform.deskDelete(_name: String?) {
     checkDeskName(_name) { name ->
         val desk = useDatabaseOnce {
-            Desk.find { Desks.name eq name }.firstOrNull()?.apply(Desk::delete)
+            Desk.find { Desks.name eq name }.limit(1).firstOrNull()?.apply(Desk::delete)
         }
         if (desk != null) {
             printSuccess("受付を削除しました (id: ${desk.id}, name: ${desk.name})")

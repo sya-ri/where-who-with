@@ -30,7 +30,7 @@ suspend fun PipelineContext<Unit, ApplicationCall>.logLeavePost() {
             (Logs.userId eq user.id.value) and
                 (Logs.areaId eq area.id.value) and
                 (Logs.leaveAt eq null)
-        }.singleOrNull()?.apply {
+        }.limit(1).firstOrNull()?.apply {
             this.leaveAt = Clock.System.now()
         }
     } ?: return call.respond(HttpStatusCode.BadRequest)
