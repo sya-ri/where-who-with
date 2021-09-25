@@ -32,5 +32,11 @@ enum class ErrorCode {
     /**
      * 既に対話モードで実行されている
      */
-    PlatformAlreadyInteract,
+    PlatformAlreadyInteract;
+
+    /**
+     * 終了コード
+     */
+    val exitCode
+        get() = ordinal + 1
 }

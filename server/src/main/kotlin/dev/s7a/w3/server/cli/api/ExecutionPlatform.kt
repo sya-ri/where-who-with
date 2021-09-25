@@ -29,7 +29,7 @@ sealed class ExecutionPlatform {
     object Command : ExecutionPlatform() {
         override fun printError(errorCode: ErrorCode, message: String) {
             println("${ShellColor.Red}ERROR: $message${ShellColor.Reset}")
-            exitProcess(errorCode.ordinal)
+            exitProcess(errorCode.exitCode)
         }
     }
 
@@ -38,7 +38,7 @@ sealed class ExecutionPlatform {
      */
     object Interact : ExecutionPlatform() {
         override fun printError(errorCode: ErrorCode, message: String) {
-            println("${ShellColor.Red}ERROR[${errorCode.ordinal}]: $message${ShellColor.Reset}")
+            println("${ShellColor.Red}ERROR[${errorCode.exitCode}]: $message${ShellColor.Reset}")
         }
     }
 }
