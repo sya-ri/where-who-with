@@ -36,6 +36,7 @@ gradlew.bat build
 #### テスト
 
 ```shell
+# Windows
 gradlew.bat test
 
 # Mac, Linux
