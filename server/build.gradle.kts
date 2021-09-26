@@ -1,3 +1,4 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.palantir.gradle.gitversion.VersionDetails
 import groovy.lang.Closure
@@ -137,4 +138,13 @@ tasks.withType<ShadowJar> {
  */
 tasks.named("build") {
     dependsOn("generateSwaggerUI")
+}
+
+/*
+ * com.palantir.git-version で勧められるバージョンを stable のみにする
+ */
+tasks.withType<DependencyUpdatesTask> {
+    rejectVersionIf {
+        isNonStable(candidate.version)
+    }
 }
