@@ -9,8 +9,17 @@ import kotlinx.datetime.Instant
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils.create
 import org.jetbrains.exposed.sql.SchemaUtils.drop
+import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.transactions.transaction
+
+/**
+ * データベースのテーブルを再作成する
+ */
+private fun <T : Table> recreate(vararg tables: T, inBatch: Boolean = false) {
+    drop(*tables, inBatch = inBatch)
+    create(*tables, inBatch = inBatch)
+}
 
 /**
  * テスト用のデータベースを初期化を行う
@@ -18,8 +27,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 fun setupTestDatabase() {
     Database.connect("jdbc:sqlite:test-database.sqlite", "org.sqlite.JDBC")
     transaction {
-        drop(*tables.toTypedArray())
-        create(*tables.toTypedArray())
+        recreate(*tables.toTypedArray())
     }
 }
 
