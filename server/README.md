@@ -7,7 +7,7 @@ $ java -jar w3server.jar
 ```
 
 ```
-Usage: java -jar w3server.jar help <Command>
+Usage: java -jar w3server.jar <Command>
 Commands:
     start -> サーバーを起動します
     desk -> 受付に関するコマンドです

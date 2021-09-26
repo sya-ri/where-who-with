@@ -226,7 +226,7 @@ sealed class Command(
         class Help(parent: Container) : Action(parent, "help", "コマンドヘルプを表示します") {
             override fun execute(platform: ExecutionPlatform, args: Array<String>, index: Int) {
                 if (platform is ExecutionPlatform.Command) {
-                    println("Usage: $runName <Command>")
+                    println("Usage: ${parent.runName} <Command>")
                 }
                 println("Commands:")
                 parent.commands.forEach {
