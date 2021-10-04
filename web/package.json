@@ -12,14 +12,15 @@
     "pack:sort": "npx sort-package-json"
   },
   "dependencies": {
-    "@ericblade/quagga2": "^1.4.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-qr-reader": "^2.2.1",
     "typescript": "^4.4.3"
   },
   "devDependencies": {
     "@types/react": "^17.0.22",
     "@types/react-dom": "^17.0.9",
+    "@types/react-qr-reader": "^2.1.4",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
     "copy-webpack-plugin": "^9.0.1",

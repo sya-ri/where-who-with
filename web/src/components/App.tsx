@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import BarcodeScannerDemo from './BarcodeScannerDemo';
 
-const App: FC = () => <BarcodeScannerDemo />;
+const App: FC = () => <></>;
 
 export default App;

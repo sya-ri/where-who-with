@@ -1,11 +1,5 @@
 # ウェブサイト
 
-## 開発
-
-### ライブラリ
-
-- [Quagga2](https://github.com/ericblade/quagga2)
-
 ### 導入
 
 ```shell
