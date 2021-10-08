@@ -1,4 +1,4 @@
-# Where Who With
+# Where Who With &nbsp; &nbsp; ![](assets/logo.png)
 
 COVID-19 Contact-Confirming Application For [@gKokasai](https://github.com/gKokasai).
 
