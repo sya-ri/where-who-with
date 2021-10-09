@@ -49,11 +49,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './html/index.html',
     }),
-    /* FIXME static が追加されたときにコメントアウトを外す
     new CopyWebpackPlugin({
       patterns: [{ from: 'static' }],
     }),
-    */
     new MiniCssExtractPlugin({
       filename: 'index.css',
     }),
