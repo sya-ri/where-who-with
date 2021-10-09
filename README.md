@@ -1,4 +1,10 @@
-# Where Who With &nbsp; &nbsp; ![](assets/logo.png)
+<p align="center">
+<a href="assets">
+<img src="assets/logo.png" alt="w3 logo" />
+</a>
+</p>
+
+<h1 align="center">Where Who With</h1>
 
 COVID-19 Contact-Confirming Application For [@gKokasai](https://github.com/gKokasai).
 
