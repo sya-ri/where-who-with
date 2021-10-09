@@ -1,6 +1,6 @@
 <p align="center">
 <a href="assets">
-<img src="assets/logo.png" alt="w3 logo" />
+<img src="assets/logo_clip.png" alt="w3 logo" />
 </a>
 </p>
 
