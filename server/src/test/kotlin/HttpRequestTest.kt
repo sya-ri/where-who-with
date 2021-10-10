@@ -2,6 +2,8 @@ import dev.s7a.w3.server.database.entity.Log
 import dev.s7a.w3.server.database.entity.User
 import dev.s7a.w3.server.model.LogRequest
 import dev.s7a.w3.server.model.LogResponse
+import dev.s7a.w3.server.model.UserCheckRequest
+import dev.s7a.w3.server.model.UserCheckResponse
 import dev.s7a.w3.server.model.UserCreateRequest
 import dev.s7a.w3.server.model.UserCreateResponse
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -16,12 +18,27 @@ import util.http.testPostRequest
 import util.setupTestDatabase
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 class HttpRequestTest {
     @BeforeTest
     fun setupDatabase() {
         setupTestDatabase()
+    }
+
+    @Test
+    fun `user can be checked`() {
+        val (desk, user) = transaction {
+            UserFactory.create().let { it.desk to it }
+        }
+        testPostRequest("/user/check") {
+            jsonBody(UserCheckRequest(desk, user))
+        }.run {
+            assertOK(response)
+            val content = response.jsonContent<UserCheckResponse>()
+            assertEquals(user.uuid, content.userUuid)
+        }
     }
 
     @Test

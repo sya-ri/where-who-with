@@ -8,6 +8,28 @@ externalDocs:
   url: https://github.com/sya-ri/where-who-with
 security: []
 paths:
+  /user/check:
+    post:
+      tags:
+        - api
+      summary: ユーザーのUUIDを確認する
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCheckRequest"
+      responses:
+        200:
+          description: ユーザーの取得に成功しました
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCheckResponse"
+        400:
+          description: |
+            - 存在しないユーザーです
+            - 存在しない受付です
   /user/create:
     post:
       tags:
@@ -75,6 +97,21 @@ paths:
             - 存在しないエリアです
 components:
   schemas:
+    UserCheckRequest:
+      type: object
+      properties:
+        desk_uuid:
+          type: string
+          description: 受付ID
+        user_id:
+          type: integer
+          description: ユーザーID
+    UserCheckResponse:
+      type: object
+      properties:
+        user_uuid:
+          type: string
+          description: ユーザーUUID
     UserCreateRequest:
       type: object
       properties:

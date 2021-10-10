@@ -1,5 +1,7 @@
 import dev.s7a.w3.server.model.LogRequest
 import dev.s7a.w3.server.model.LogResponse
+import dev.s7a.w3.server.model.UserCheckRequest
+import dev.s7a.w3.server.model.UserCheckResponse
 import dev.s7a.w3.server.model.UserCreateRequest
 import dev.s7a.w3.server.model.UserCreateResponse
 import kotlinx.datetime.Clock
@@ -25,6 +27,20 @@ class ModelTest {
     fun `encode LogResponse to json`() {
         val now = Clock.System.now()
         assertEquals("{\"date\":\"$now\"}", Json.encodeToString(LogResponse(now)))
+    }
+
+    @Test
+    fun `decode UserCheckRequest from json`() {
+        val deskUuid = UUID.randomUUID()
+        val userId = 0
+        val json = "{\"desk_uuid\":\"$deskUuid\",\"user_id\":$userId}"
+        assertEquals(UserCheckRequest(deskUuid, userId), Json.decodeFromString(json))
+    }
+
+    @Test
+    fun `encode UserCheckResponse to json`() {
+        val userUuid = UUID.randomUUID()
+        assertEquals("{\"user_uuid\":\"$userUuid\"}", Json.encodeToString(UserCheckResponse(userUuid)))
     }
 
     @Test
