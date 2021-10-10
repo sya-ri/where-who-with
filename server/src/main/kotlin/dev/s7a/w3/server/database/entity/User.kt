@@ -13,6 +13,11 @@ class User(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<User>(Users)
 
     /**
+     * 識別子名
+     */
+    val uuid by Users.uuid
+
+    /**
      * 受付
      */
     var desk by Desk referencedOn Users.deskId

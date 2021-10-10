@@ -3,7 +3,9 @@ package dev.s7a.w3.server.route.http.log.join
 import dev.s7a.w3.server.database.entity.Area
 import dev.s7a.w3.server.database.entity.Log
 import dev.s7a.w3.server.database.entity.User
+import dev.s7a.w3.server.database.table.Areas
 import dev.s7a.w3.server.database.table.Logs
+import dev.s7a.w3.server.database.table.Users
 import dev.s7a.w3.server.model.LogRequest
 import dev.s7a.w3.server.model.LogResponse
 import dev.s7a.w3.server.util.receiveOrRespondBadRequest
@@ -25,8 +27,8 @@ import org.jetbrains.exposed.sql.transactions.transaction
 suspend fun PipelineContext<Unit, ApplicationCall>.logJoinPost() {
     val request = call.receiveOrRespondBadRequest<LogRequest>() ?: return
     val log = transaction {
-        val user = User.findById(request.userId) ?: return@transaction null
-        val area = Area.findById(request.areaId) ?: return@transaction null
+        val user = User.find { Users.uuid eq request.userUuid }.limit(1).firstOrNull() ?: return@transaction null
+        val area = Area.find { Areas.uuid eq request.areaUuid }.limit(1).firstOrNull() ?: return@transaction null
         Log.find {
             (Logs.userId eq user.id.value) and
                 (Logs.areaId eq area.id.value) and

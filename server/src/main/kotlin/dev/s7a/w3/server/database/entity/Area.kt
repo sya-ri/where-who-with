@@ -13,6 +13,11 @@ class Area(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<Area>(Areas)
 
     /**
+     * 識別子名
+     */
+    val uuid by Areas.uuid
+
+    /**
      * エリア名
      */
     var name by Areas.name

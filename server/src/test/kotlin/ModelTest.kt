@@ -7,6 +7,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -14,10 +15,10 @@ import kotlin.test.assertEquals
 class ModelTest {
     @Test
     fun `decode LogRequest from json`() {
-        val userId = 0
-        val areaId = 0
-        val json = "{\"user_id\":$userId,\"area_id\":$areaId}"
-        assertEquals(LogRequest(userId, areaId), Json.decodeFromString(json))
+        val userUuid = UUID.randomUUID()
+        val areaUuid = UUID.randomUUID()
+        val json = "{\"user_uuid\":\"$userUuid\",\"area_uuid\":\"$areaUuid\"}"
+        assertEquals(LogRequest(userUuid, areaUuid), Json.decodeFromString(json))
     }
 
     @Test
@@ -28,14 +29,15 @@ class ModelTest {
 
     @Test
     fun `decode UserRequest from json`() {
-        val deskId = 0
-        val json = "{\"desk_id\":$deskId}"
-        assertEquals(UserRequest(deskId), Json.decodeFromString(json))
+        val deskUuid = UUID.randomUUID()
+        val json = "{\"desk_uuid\":\"$deskUuid\"}"
+        assertEquals(UserRequest(deskUuid), Json.decodeFromString(json))
     }
 
     @Test
     fun `encode UserResponse to json`() {
         val userId = 0
-        assertEquals("{\"user_id\":$userId}", Json.encodeToString(UserResponse(userId)))
+        val userUuid = UUID.randomUUID()
+        assertEquals("{\"user_id\":$userId,\"user_uuid\":\"$userUuid\"}", Json.encodeToString(UserResponse(userId, userUuid)))
     }
 }
