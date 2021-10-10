@@ -78,8 +78,8 @@ components:
     UserRequest:
       type: object
       properties:
-        desk_id:
-          type: integer
+        desk_uuid:
+          type: string
           description: 受付ID
     UserResponse:
       type: object
@@ -87,14 +87,17 @@ components:
         user_id:
           type: integer
           description: 作成したユーザーID
+        user_uuid:
+          type: string
+          description: 作成したユーザーUUID
     LogRequest:
       type: object
       properties:
-        user_id:
-          type: integer
+        user_uuid:
+          type: string
           description: ユーザーID
-        area_id:
-          type: integer
+        area_uuid:
+          type: string
           description: エリアID
     LogResponse:
       type: object

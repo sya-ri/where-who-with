@@ -2,6 +2,7 @@ package dev.s7a.w3.server.route.http.user
 
 import dev.s7a.w3.server.database.entity.Desk
 import dev.s7a.w3.server.database.entity.User
+import dev.s7a.w3.server.database.table.Desks
 import dev.s7a.w3.server.model.UserRequest
 import dev.s7a.w3.server.model.UserResponse
 import dev.s7a.w3.server.util.receiveOrRespondBadRequest
@@ -10,6 +11,7 @@ import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.util.pipeline.PipelineContext
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 
 /**
@@ -20,7 +22,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 suspend fun PipelineContext<Unit, ApplicationCall>.userPost() {
     val request = call.receiveOrRespondBadRequest<UserRequest>() ?: return
     val user = transaction {
-        val desk = Desk.findById(request.deskId)
+        val desk = Desk.find { Desks.uuid eq request.deskUuid }.limit(1).firstOrNull()
         desk?.let {
             User.new {
                 this.desk = desk
