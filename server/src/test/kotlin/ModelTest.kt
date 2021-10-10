@@ -1,7 +1,9 @@
 import dev.s7a.w3.server.model.LogRequest
 import dev.s7a.w3.server.model.LogResponse
-import dev.s7a.w3.server.model.UserRequest
-import dev.s7a.w3.server.model.UserResponse
+import dev.s7a.w3.server.model.UserCheckRequest
+import dev.s7a.w3.server.model.UserCheckResponse
+import dev.s7a.w3.server.model.UserCreateRequest
+import dev.s7a.w3.server.model.UserCreateResponse
 import kotlinx.datetime.Clock
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
@@ -28,16 +30,30 @@ class ModelTest {
     }
 
     @Test
-    fun `decode UserRequest from json`() {
+    fun `decode UserCheckRequest from json`() {
         val deskUuid = UUID.randomUUID()
-        val json = "{\"desk_uuid\":\"$deskUuid\"}"
-        assertEquals(UserRequest(deskUuid), Json.decodeFromString(json))
+        val userId = 0
+        val json = "{\"desk_uuid\":\"$deskUuid\",\"user_id\":$userId}"
+        assertEquals(UserCheckRequest(deskUuid, userId), Json.decodeFromString(json))
     }
 
     @Test
-    fun `encode UserResponse to json`() {
+    fun `encode UserCheckResponse to json`() {
+        val userUuid = UUID.randomUUID()
+        assertEquals("{\"user_uuid\":\"$userUuid\"}", Json.encodeToString(UserCheckResponse(userUuid)))
+    }
+
+    @Test
+    fun `decode UserCreateRequest from json`() {
+        val deskUuid = UUID.randomUUID()
+        val json = "{\"desk_uuid\":\"$deskUuid\"}"
+        assertEquals(UserCreateRequest(deskUuid), Json.decodeFromString(json))
+    }
+
+    @Test
+    fun `encode UserCreateResponse to json`() {
         val userId = 0
         val userUuid = UUID.randomUUID()
-        assertEquals("{\"user_id\":$userId,\"user_uuid\":\"$userUuid\"}", Json.encodeToString(UserResponse(userId, userUuid)))
+        assertEquals("{\"user_id\":$userId,\"user_uuid\":\"$userUuid\"}", Json.encodeToString(UserCreateResponse(userId, userUuid)))
     }
 }

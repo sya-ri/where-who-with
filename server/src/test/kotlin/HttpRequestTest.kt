@@ -2,8 +2,10 @@ import dev.s7a.w3.server.database.entity.Log
 import dev.s7a.w3.server.database.entity.User
 import dev.s7a.w3.server.model.LogRequest
 import dev.s7a.w3.server.model.LogResponse
-import dev.s7a.w3.server.model.UserRequest
-import dev.s7a.w3.server.model.UserResponse
+import dev.s7a.w3.server.model.UserCheckRequest
+import dev.s7a.w3.server.model.UserCheckResponse
+import dev.s7a.w3.server.model.UserCreateRequest
+import dev.s7a.w3.server.model.UserCreateResponse
 import org.jetbrains.exposed.sql.transactions.transaction
 import util.factory.AreaFactory
 import util.factory.DeskFactory
@@ -16,6 +18,7 @@ import util.http.testPostRequest
 import util.setupTestDatabase
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 class HttpRequestTest {
@@ -25,15 +28,29 @@ class HttpRequestTest {
     }
 
     @Test
+    fun `user can be checked`() {
+        val (desk, user) = transaction {
+            UserFactory.create().let { it.desk to it }
+        }
+        testPostRequest("/user/check") {
+            jsonBody(UserCheckRequest(desk, user))
+        }.run {
+            assertOK(response)
+            val content = response.jsonContent<UserCheckResponse>()
+            assertEquals(user.uuid, content.userUuid)
+        }
+    }
+
+    @Test
     fun `user can be created`() {
         val desk = transaction {
             DeskFactory.create()
         }
-        testPostRequest("/user") {
-            jsonBody(UserRequest(desk))
+        testPostRequest("/user/create") {
+            jsonBody(UserCreateRequest(desk))
         }.run {
             assertOK(response)
-            val content = response.jsonContent<UserResponse>()
+            val content = response.jsonContent<UserCreateResponse>()
             val user = transaction {
                 User.findById(content.userId)
             }

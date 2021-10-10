@@ -7,13 +7,11 @@ import kotlinx.serialization.Serializable
 import java.util.UUID
 
 /**
- * @param userId 作成したユーザーID
- * @param userUuid 作成したユーザーID
+ * @param userUuid ユーザーID
  */
 @Serializable
-data class UserResponse(
-    @SerialName("user_id") val userId: Int,
+data class UserCheckResponse(
     @SerialName("user_uuid") @Serializable(with = UUIDSerializer::class) val userUuid: UUID,
 ) {
-    constructor(user: User) : this(user.id.value, user.uuid)
+    constructor(user: User) : this(user.uuid)
 }
