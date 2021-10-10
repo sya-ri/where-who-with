@@ -2,8 +2,8 @@ import dev.s7a.w3.server.database.entity.Log
 import dev.s7a.w3.server.database.entity.User
 import dev.s7a.w3.server.model.LogRequest
 import dev.s7a.w3.server.model.LogResponse
-import dev.s7a.w3.server.model.UserRequest
-import dev.s7a.w3.server.model.UserResponse
+import dev.s7a.w3.server.model.UserCreateRequest
+import dev.s7a.w3.server.model.UserCreateResponse
 import org.jetbrains.exposed.sql.transactions.transaction
 import util.factory.AreaFactory
 import util.factory.DeskFactory
@@ -29,11 +29,11 @@ class HttpRequestTest {
         val desk = transaction {
             DeskFactory.create()
         }
-        testPostRequest("/user") {
-            jsonBody(UserRequest(desk))
+        testPostRequest("/user/create") {
+            jsonBody(UserCreateRequest(desk))
         }.run {
             assertOK(response)
-            val content = response.jsonContent<UserResponse>()
+            val content = response.jsonContent<UserCreateResponse>()
             val user = transaction {
                 User.findById(content.userId)
             }

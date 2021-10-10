@@ -2,7 +2,7 @@ package dev.s7a.w3.server.route
 
 import dev.s7a.w3.server.route.http.log.join.logJoinPost
 import dev.s7a.w3.server.route.http.log.leave.logLeavePost
-import dev.s7a.w3.server.route.http.user.userPost
+import dev.s7a.w3.server.route.http.user.create.userCreatePost
 import io.ktor.http.content.defaultResource
 import io.ktor.http.content.resource
 import io.ktor.routing.Routing
@@ -15,7 +15,9 @@ import io.ktor.routing.route
 fun Routing.route() {
     swaggerRoute()
     route("/user") {
-        post { userPost() }
+        route("/create") {
+            post { userCreatePost() }
+        }
     }
     route("/log") {
         route("/join") {

@@ -10,7 +10,7 @@ import java.util.UUID
  * @param deskUuid 受付ID
  */
 @Serializable
-data class UserRequest(
+data class UserCreateRequest(
     @SerialName("desk_uuid") @Serializable(with = UUIDSerializer::class) val deskUuid: UUID,
 ) {
     constructor(desk: Desk) : this(desk.uuid)

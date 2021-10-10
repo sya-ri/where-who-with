@@ -8,7 +8,7 @@ externalDocs:
   url: https://github.com/sya-ri/where-who-with
 security: []
 paths:
-  /user:
+  /user/create:
     post:
       tags:
         - api
@@ -18,14 +18,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserRequest"
+              $ref: "#/components/schemas/UserCreateRequest"
       responses:
         200:
           description: ユーザーの作成に成功しました
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserResponse"
+                $ref: "#/components/schemas/UserCreateResponse"
         400:
           description: |
             - 存在しない受付です
@@ -75,13 +75,13 @@ paths:
             - 存在しないエリアです
 components:
   schemas:
-    UserRequest:
+    UserCreateRequest:
       type: object
       properties:
         desk_uuid:
           type: string
           description: 受付ID
-    UserResponse:
+    UserCreateResponse:
       type: object
       properties:
         user_id:

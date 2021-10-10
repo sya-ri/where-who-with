@@ -11,7 +11,7 @@ import java.util.UUID
  * @param userUuid 作成したユーザーID
  */
 @Serializable
-data class UserResponse(
+data class UserCreateResponse(
     @SerialName("user_id") val userId: Int,
     @SerialName("user_uuid") @Serializable(with = UUIDSerializer::class) val userUuid: UUID,
 ) {
