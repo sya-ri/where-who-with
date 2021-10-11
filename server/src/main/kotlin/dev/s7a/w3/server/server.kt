@@ -3,7 +3,9 @@ package dev.s7a.w3.server
 import dev.s7a.w3.server.route.route
 import io.ktor.application.Application
 import io.ktor.application.install
+import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
+import io.ktor.http.HttpHeaders
 import io.ktor.routing.Routing
 import io.ktor.routing.routing
 import io.ktor.serialization.json
@@ -23,6 +25,10 @@ fun startServer() {
 fun Application.application() {
     install(ContentNegotiation) {
         json()
+    }
+    install(CORS) {
+        anyHost()
+        header(HttpHeaders.ContentType)
     }
     routing(Routing::route)
 }
