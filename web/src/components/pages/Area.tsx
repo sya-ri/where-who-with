@@ -13,7 +13,10 @@ const Area: FC = () => {
   const [userUuid, setUserUuid] = useState<string | null>();
   return (
     <div>
-      <div>
+      <Typography variant="h5" className="text-center pb-2">
+        入退室記録
+      </Typography>
+      <div className="m-auto w-64 pt-4">
         <QrReader
           onScan={(data) => {
             if (data) {
@@ -25,11 +28,17 @@ const Area: FC = () => {
           }}
         />
       </div>
-      <div className="text-center">
-        <Typography>{userUuid || 'QRコードをスキャンしてください'}</Typography>
-        <div>
+      <div>
+        <Typography
+          variant="body2"
+          className="text-gray-600 text-center pt-2 pb-4"
+        >
+          {userUuid || 'QRコードをスキャンしてください'}
+        </Typography>
+        <div className="flex justify-between">
           <Button
             variant="contained"
+            color="success"
             disabled={!userUuid}
             onClick={() => {
               if (userUuid) {
@@ -44,11 +53,13 @@ const Area: FC = () => {
                   });
               }
             }}
+            className="w-5/12"
           >
             入室
           </Button>
           <Button
             variant="contained"
+            color="error"
             disabled={!userUuid}
             onClick={() => {
               if (userUuid) {
@@ -63,6 +74,7 @@ const Area: FC = () => {
                   });
               }
             }}
+            className="w-5/12"
           >
             退室
           </Button>

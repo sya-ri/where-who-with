@@ -12,59 +12,65 @@ const Desk: FC = () => {
   const { uuid } = useParams<Params>();
   const [checkUserId, setCheckUserId] = useState<number | null>();
   return (
-    <div className="text-center">
-      <Typography variant="h3" className="p-4">
-        受付
+    <div>
+      <Typography variant="h5" className="text-center pb-2">
+        受付画面
       </Typography>
-      <div className="mb-2">
-        <Button
-          variant="contained"
-          onClick={() => {
-            api
-              .postUserCreate({ desk_uuid: uuid })
-              .then((response) => {
-                const { user_id, user_uuid } = response.data;
-                const params = `?id=${user_id}&uuid=${user_uuid}`;
-                window.location.href = Pages.DeskView(uuid) + params;
-              })
-              .catch((reason) => console.log(reason));
-          }}
-        >
-          ユーザー作成
-        </Button>
-      </div>
-      <div>
-        <TextField
-          variant="outlined"
-          type="number"
-          value={checkUserId}
-          onChange={(event) => {
-            const value = parseInt(event.target.value);
-            if (value) {
-              setCheckUserId(value);
-            }
-          }}
-        />
-        <Button
-          variant="contained"
-          onClick={() => {
-            if (checkUserId) {
+      <div className="border-b border-gray-400 py-4">
+        <div className="text-center mx-auto">
+          <Button
+            variant="contained"
+            onClick={() => {
               api
-                .postUserCheck({ desk_uuid: uuid, user_id: checkUserId })
+                .postUserCreate({ desk_uuid: uuid })
                 .then((response) => {
-                  const { user_uuid } = response.data;
-                  const params = `?id=${checkUserId}&uuid=${user_uuid}`;
+                  const { user_id, user_uuid } = response.data;
+                  const params = `?id=${user_id}&uuid=${user_uuid}`;
                   window.location.href = Pages.DeskView(uuid) + params;
                 })
-                .catch((reason) => {
-                  console.error(reason);
-                  setCheckUserId(null);
-                });
-            }
-          }}
-        >
-          表示
-        </Button>
+                .catch((reason) => console.log(reason));
+            }}
+            className="h-14 w-full"
+          >
+            新しくユーザーを作成する
+          </Button>
+        </div>
+      </div>
+      <div className="pt-4">
+        <div className="flex justify-between">
+          <TextField
+            variant="outlined"
+            type="number"
+            value={checkUserId}
+            label="ユーザーID"
+            onChange={(event) => {
+              const value = parseInt(event.target.value);
+              if (value) {
+                setCheckUserId(value);
+              }
+            }}
+          />
+          <Button
+            variant="contained"
+            onClick={() => {
+              if (checkUserId) {
+                api
+                  .postUserCheck({ desk_uuid: uuid, user_id: checkUserId })
+                  .then((response) => {
+                    const { user_uuid } = response.data;
+                    const params = `?id=${checkUserId}&uuid=${user_uuid}`;
+                    window.location.href = Pages.DeskView(uuid) + params;
+                  })
+                  .catch((reason) => {
+                    console.error(reason);
+                    setCheckUserId(null);
+                  });
+              }
+            }}
+          >
+            検索
+          </Button>
+        </div>
       </div>
     </div>
   );
