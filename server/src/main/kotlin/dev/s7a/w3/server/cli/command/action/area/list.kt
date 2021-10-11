@@ -13,6 +13,6 @@ fun ExecutionPlatform.areaList() {
     }
     println("エリア一覧(${areas.size}):")
     areas.forEach {
-        println(" - ${it.id}: ${it.name}")
+        println(" - ${it.id}[${it.uuid}]: ${it.name}")
     }
 }

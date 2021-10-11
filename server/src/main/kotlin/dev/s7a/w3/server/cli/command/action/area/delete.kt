@@ -16,7 +16,7 @@ fun ExecutionPlatform.areaDelete(_name: String?) {
             Area.find { Areas.name eq name }.limit(1).firstOrNull()?.apply(Area::delete)
         }
         if (desk != null) {
-            printSuccess("エリアを削除しました (id: ${desk.id}, name: ${desk.name})")
+            printSuccess("エリアを削除しました (id: ${desk.id}, uuid: ${desk.uuid}, name: ${desk.name})")
         } else {
             printError(ErrorCode.OptionNotFound, "存在しないエリア名です")
         }
