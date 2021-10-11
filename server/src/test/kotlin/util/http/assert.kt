@@ -17,3 +17,10 @@ fun assertStatusCode(expected: HttpStatusCode, response: TestApplicationResponse
 fun assertOK(response: TestApplicationResponse, message: String? = null) {
     assertStatusCode(HttpStatusCode.OK, response, message)
 }
+
+/**
+ * [HttpStatusCode.BadRequest] であるかのアサートを行う
+ */
+fun assertBadRequest(response: TestApplicationResponse, message: String? = null) {
+    assertStatusCode(HttpStatusCode.BadRequest, response, message)
+}

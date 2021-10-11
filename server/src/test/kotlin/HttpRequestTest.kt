@@ -11,11 +11,13 @@ import util.factory.AreaFactory
 import util.factory.DeskFactory
 import util.factory.UserFactory
 import util.find
+import util.http.assertBadRequest
 import util.http.assertOK
 import util.http.jsonBody
 import util.http.jsonContent
 import util.http.testPostRequest
 import util.setupTestDatabase
+import java.util.UUID
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -42,6 +44,18 @@ class HttpRequestTest {
     }
 
     @Test
+    fun `user check from another desk rejected`() {
+        val (desk, user) = transaction {
+            DeskFactory.create() to UserFactory.create()
+        }
+        testPostRequest("/user/check") {
+            jsonBody(UserCheckRequest(desk, user))
+        }.run {
+            assertBadRequest(response)
+        }
+    }
+
+    @Test
     fun `user can be created`() {
         val desk = transaction {
             DeskFactory.create()
@@ -55,6 +69,17 @@ class HttpRequestTest {
                 User.findById(content.userId)
             }
             assertNotNull(user)
+            assertEquals(user.uuid, content.userUuid)
+        }
+    }
+
+    @Test
+    fun `user create from not exist desk rejected`() {
+        val deskUuid = UUID.randomUUID()
+        testPostRequest("/user/create") {
+            jsonBody(UserCreateRequest(deskUuid))
+        }.run {
+            assertBadRequest(response)
         }
     }
 
@@ -83,6 +108,22 @@ class HttpRequestTest {
                 Log.find(user, area, joinedAt, content.date).limit(1).firstOrNull()
             }
             assertNotNull(log)
+        }
+    }
+
+    @Test
+    fun `log create if user or area not exist rejected`() {
+        val userUuid = UUID.randomUUID()
+        val areaUuid = UUID.randomUUID()
+        testPostRequest("/log/join") {
+            jsonBody(LogRequest(userUuid, areaUuid))
+        }.run {
+            assertBadRequest(response)
+        }
+        testPostRequest("/log/leave") {
+            jsonBody(LogRequest(userUuid, areaUuid))
+        }.run {
+            assertBadRequest(response)
         }
     }
 }
