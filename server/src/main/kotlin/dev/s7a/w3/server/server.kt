@@ -14,7 +14,7 @@ import io.ktor.server.engine.embeddedServer
  * サーバーを起動する
  */
 fun startServer() {
-    embeddedServer(CIO, module = Application::application).start(true)
+    embeddedServer(CIO, port = 8080, module = Application::application).start(true)
 }
 
 /**
