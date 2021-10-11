@@ -23,7 +23,7 @@ fun ExecutionPlatform.deskCreate(_name: String?) {
             }
         }
         if (desk != null) {
-            printSuccess("受付を追加しました (id: ${desk.id}, name: ${desk.name})")
+            printSuccess("受付を追加しました (id: ${desk.id}, uuid: ${desk.uuid}, name: ${desk.name})")
         } else {
             printError(ErrorCode.OptionExist, "既に存在する受付名です")
         }

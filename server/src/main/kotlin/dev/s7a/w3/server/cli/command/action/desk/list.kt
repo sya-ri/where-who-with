@@ -12,6 +12,6 @@ fun deskList() {
     }
     println("受付一覧(${desks.size}):")
     desks.forEach {
-        println(" - ${it.id}: ${it.name}")
+        println(" - ${it.id}[${it.uuid}]: ${it.name}")
     }
 }

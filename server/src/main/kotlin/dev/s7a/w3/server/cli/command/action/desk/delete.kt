@@ -16,7 +16,7 @@ fun ExecutionPlatform.deskDelete(_name: String?) {
             Desk.find { Desks.name eq name }.limit(1).firstOrNull()?.apply(Desk::delete)
         }
         if (desk != null) {
-            printSuccess("受付を削除しました (id: ${desk.id}, name: ${desk.name})")
+            printSuccess("受付を削除しました (id: ${desk.id}, uuid: ${desk.uuid}, name: ${desk.name})")
         } else {
             printError(ErrorCode.OptionNotFound, "存在しない受付名です")
         }

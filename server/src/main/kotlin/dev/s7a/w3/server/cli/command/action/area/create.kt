@@ -23,7 +23,7 @@ fun ExecutionPlatform.areaCreate(_name: String?) {
             }
         }
         if (area != null) {
-            printSuccess("エリアを追加しました (id: ${area.id}, name: ${area.name})")
+            printSuccess("エリアを追加しました (id: ${area.id}, uuid: ${area.uuid}, name: ${area.name})")
         } else {
             printError(ErrorCode.OptionExist, "既に存在するエリア名です")
         }
