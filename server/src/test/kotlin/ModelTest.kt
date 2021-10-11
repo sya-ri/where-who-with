@@ -5,15 +5,11 @@ import dev.s7a.w3.server.model.UserCheckResponse
 import dev.s7a.w3.server.model.UserCreateRequest
 import dev.s7a.w3.server.model.UserCreateResponse
 import kotlinx.datetime.Clock
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import util.assertJsonDecode
+import util.assertJsonEncode
 import java.util.UUID
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
-@OptIn(ExperimentalSerializationApi::class)
 class ModelTest {
     @Test
     fun `decode LogRequest from json`() {
@@ -22,7 +18,7 @@ class ModelTest {
         val json = """
             {"user_uuid":"$userUuid","area_uuid":"$areaUuid"}
         """.trimIndent()
-        assertEquals(LogRequest(userUuid, areaUuid), Json.decodeFromString(json))
+        assertJsonDecode(LogRequest(userUuid, areaUuid), json)
     }
 
     @Test
@@ -31,7 +27,7 @@ class ModelTest {
         val json = """
             {"date":"$now"}
         """.trimIndent()
-        assertEquals(json, Json.encodeToString(LogResponse(now)))
+        assertJsonEncode(json, LogResponse(now))
     }
 
     @Test
@@ -41,7 +37,7 @@ class ModelTest {
         val json = """
             {"desk_uuid":"$deskUuid","user_id":$userId}
         """.trimIndent()
-        assertEquals(UserCheckRequest(deskUuid, userId), Json.decodeFromString(json))
+        assertJsonDecode(UserCheckRequest(deskUuid, userId), json)
     }
 
     @Test
@@ -50,7 +46,7 @@ class ModelTest {
         val json = """
             {"user_uuid":"$userUuid"}
         """.trimIndent()
-        assertEquals(json, Json.encodeToString(UserCheckResponse(userUuid)))
+        assertJsonEncode(json, UserCheckResponse(userUuid))
     }
 
     @Test
@@ -59,7 +55,7 @@ class ModelTest {
         val json = """
             {"desk_uuid":"$deskUuid"}
         """.trimIndent()
-        assertEquals(UserCreateRequest(deskUuid), Json.decodeFromString(json))
+        assertJsonDecode(UserCreateRequest(deskUuid), json)
     }
 
     @Test
@@ -69,6 +65,6 @@ class ModelTest {
         val json = """
             {"user_id":$userId,"user_uuid":"$userUuid"}
         """.trimIndent()
-        assertEquals(json, Json.encodeToString(UserCreateResponse(userId, userUuid)))
+        assertJsonEncode(json, UserCreateResponse(userId, userUuid))
     }
 }
