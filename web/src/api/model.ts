@@ -4,7 +4,7 @@ export interface UserCheckRequest {
 }
 
 export interface UserCheckResponse {
-  desk_uuid: string;
+  user_uuid: string;
 }
 
 export interface UserCreateRequest {
