@@ -69,6 +69,7 @@ class HttpRequestTest {
                 User.findById(content.userId)
             }
             assertNotNull(user)
+            assertEquals(user.uuid, content.userUuid)
         }
     }
 
