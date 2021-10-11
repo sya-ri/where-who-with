@@ -50,6 +50,11 @@ module.exports = {
       template: './html/index.html',
       inject: false,
     }),
+    new HtmlWebpackPlugin({
+      filename: '404.html',
+      template: './html/404.html',
+      inject: false,
+    }),
     new CopyWebpackPlugin({
       patterns: [{ from: 'static' }],
     }),
