@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import QRCode from 'react-qr-code';
 import { getUserURL } from '../../util/user';
+import { Button, TextField } from '@mui/material';
+import * as Pages from '../../Pages';
 
 type Params = {
   uuid: string;
@@ -17,7 +19,30 @@ const DeskView: FC = () => {
   console.log(userPageUrl);
   return (
     <div>
-      <QRCode value={userPageUrl} />
+      <div className="flex justify-center p-10">
+        <QRCode value={userPageUrl} />
+      </div>
+      <div className="text-center">
+        <div>
+          <TextField
+            label="ID"
+            type="number"
+            defaultValue={userId}
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+          <Button variant="contained">印刷</Button>
+        </div>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            window.location.href = Pages.Desk(uuid);
+          }}
+        >
+          戻る
+        </Button>
+      </div>
     </div>
   );
 };
