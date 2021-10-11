@@ -48,6 +48,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './html/index.html',
+      inject: false,
     }),
     new CopyWebpackPlugin({
       patterns: [{ from: 'static' }],
