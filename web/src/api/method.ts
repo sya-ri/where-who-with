@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import {
   LogRequest,
   LogResponse,
@@ -12,8 +12,8 @@ const url = process.env.API_URL;
 
 export const postUserCheck = (
   request: UserCheckRequest
-): Promise<UserCheckResponse> => {
-  return axios.post<UserCreateRequest, UserCheckResponse>(
+): Promise<AxiosResponse<UserCheckResponse>> => {
+  return axios.post<UserCreateRequest, AxiosResponse<UserCheckResponse>>(
     `${url}/user/check`,
     request
   );
@@ -21,17 +21,27 @@ export const postUserCheck = (
 
 export const postUserCreate = (
   request: UserCreateRequest
-): Promise<UserCreateResponse> => {
-  return axios.post<UserCreateRequest, UserCreateResponse>(
+): Promise<AxiosResponse<UserCreateResponse>> => {
+  return axios.post<UserCreateRequest, AxiosResponse<UserCreateResponse>>(
     `${url}/user/create`,
     request
   );
 };
 
-export const postLogJoin = (request: LogRequest): Promise<LogResponse> => {
-  return axios.post<LogRequest, LogResponse>(`${url}/log/join`, request);
+export const postLogJoin = (
+  request: LogRequest
+): Promise<AxiosResponse<LogResponse>> => {
+  return axios.post<LogRequest, AxiosResponse<LogResponse>>(
+    `${url}/log/join`,
+    request
+  );
 };
 
-export const postLogLeave = (request: LogRequest): Promise<LogResponse> => {
-  return axios.post<LogRequest, LogResponse>(`${url}/log/leave`, request);
+export const postLogLeave = (
+  request: LogRequest
+): Promise<AxiosResponse<LogResponse>> => {
+  return axios.post<LogRequest, AxiosResponse<LogResponse>>(
+    `${url}/log/leave`,
+    request
+  );
 };
