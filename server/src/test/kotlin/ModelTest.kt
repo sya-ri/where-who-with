@@ -19,34 +19,46 @@ class ModelTest {
     fun `decode LogRequest from json`() {
         val userUuid = UUID.randomUUID()
         val areaUuid = UUID.randomUUID()
-        val json = "{\"user_uuid\":\"$userUuid\",\"area_uuid\":\"$areaUuid\"}"
+        val json = """
+            {"user_uuid":"$userUuid","area_uuid":"$areaUuid"}
+        """.trimIndent()
         assertEquals(LogRequest(userUuid, areaUuid), Json.decodeFromString(json))
     }
 
     @Test
     fun `encode LogResponse to json`() {
         val now = Clock.System.now()
-        assertEquals("{\"date\":\"$now\"}", Json.encodeToString(LogResponse(now)))
+        val json = """
+            {"date":"$now"}
+        """.trimIndent()
+        assertEquals(json, Json.encodeToString(LogResponse(now)))
     }
 
     @Test
     fun `decode UserCheckRequest from json`() {
         val deskUuid = UUID.randomUUID()
         val userId = 0
-        val json = "{\"desk_uuid\":\"$deskUuid\",\"user_id\":$userId}"
+        val json = """
+            {"desk_uuid":"$deskUuid","user_id":$userId}
+        """.trimIndent()
         assertEquals(UserCheckRequest(deskUuid, userId), Json.decodeFromString(json))
     }
 
     @Test
     fun `encode UserCheckResponse to json`() {
         val userUuid = UUID.randomUUID()
-        assertEquals("{\"user_uuid\":\"$userUuid\"}", Json.encodeToString(UserCheckResponse(userUuid)))
+        val json = """
+            {"user_uuid":"$userUuid"}
+        """.trimIndent()
+        assertEquals(json, Json.encodeToString(UserCheckResponse(userUuid)))
     }
 
     @Test
     fun `decode UserCreateRequest from json`() {
         val deskUuid = UUID.randomUUID()
-        val json = "{\"desk_uuid\":\"$deskUuid\"}"
+        val json = """
+            {"desk_uuid":"$deskUuid"}
+        """.trimIndent()
         assertEquals(UserCreateRequest(deskUuid), Json.decodeFromString(json))
     }
 
@@ -54,6 +66,9 @@ class ModelTest {
     fun `encode UserCreateResponse to json`() {
         val userId = 0
         val userUuid = UUID.randomUUID()
-        assertEquals("{\"user_id\":$userId,\"user_uuid\":\"$userUuid\"}", Json.encodeToString(UserCreateResponse(userId, userUuid)))
+        val json = """
+            {"user_id":$userId,"user_uuid":"$userUuid"}
+        """.trimIndent()
+        assertEquals(json, Json.encodeToString(UserCreateResponse(userId, userUuid)))
     }
 }
