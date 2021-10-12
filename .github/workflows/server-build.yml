@@ -1,0 +1,26 @@
+name: Server - Build Jar
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: 11
+          cache: gradle
+      - name: Lint
+        run: cd server && ./gradlew build
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: action-v${{ github.run_number }}
+          files: |
+            server/build/libs/w3server.jar
