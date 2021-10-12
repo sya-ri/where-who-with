@@ -1,4 +1,4 @@
-import MuiAlert from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import React, { FC, useState } from 'react';
 import createContext from '../util/createContext';
@@ -111,9 +111,9 @@ export const AlertProvider: FC = (props) => {
           vertical: 'bottom',
         }}
       >
-        <MuiAlert onClose={type.close} severity={state.severity}>
+        <Alert onClose={type.close} severity={state.severity}>
           {state.message}
-        </MuiAlert>
+        </Alert>
       </Snackbar>
     </SetAlertProvider>
   );
