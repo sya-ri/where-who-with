@@ -8,6 +8,12 @@ import {
   UserCreateResponse,
 } from './model';
 
+/**
+ * - webpack.config.dev.js
+ * - webpack.config.product.js
+ *
+ * で定義されます
+ */
 const url = process.env.API_URL;
 
 export const postUserCheck = (
