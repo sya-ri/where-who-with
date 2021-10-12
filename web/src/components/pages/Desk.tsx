@@ -1,8 +1,8 @@
+import { Button, TextField, Typography } from '@mui/material';
 import React, { FC, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button, TextField, Typography } from '@mui/material';
-import * as api from '../../api/method';
 import * as Pages from '../../Pages';
+import * as api from '../../api/method';
 
 type Params = {
   uuid: string;

@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import * as Pages from '../Pages';
 import Area from './pages/Area';
 import Desk from './pages/Desk';
-import * as Pages from '../Pages';
 import DeskView from './pages/DeskView';
-import User from './pages/User';
 import NotFound from './pages/NotFound';
+import User from './pages/User';
 
 const App: FC = () => (
   <div className="app h-full">

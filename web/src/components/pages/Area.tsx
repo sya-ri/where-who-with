@@ -1,7 +1,7 @@
-import React, { FC, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import QrReader from 'react-qr-reader';
 import { Button, Typography } from '@mui/material';
+import React, { FC, useState } from 'react';
+import QrReader from 'react-qr-reader';
+import { useParams } from 'react-router-dom';
 import * as api from '../../api/method';
 
 type Params = {

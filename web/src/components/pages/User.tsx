@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import { useParams } from 'react-router-dom';
-import QRCode from 'react-qr-code';
-import { getUserURL } from '../../util/user';
 import { Typography } from '@mui/material';
+import React, { FC } from 'react';
+import QRCode from 'react-qr-code';
+import { useParams } from 'react-router-dom';
+import { getUserURL } from '../../util/user';
 
 type Params = {
   uuid: string;
