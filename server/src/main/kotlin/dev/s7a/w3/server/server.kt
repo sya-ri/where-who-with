@@ -3,6 +3,7 @@ package dev.s7a.w3.server
 import dev.s7a.w3.server.route.route
 import io.ktor.application.Application
 import io.ktor.application.install
+import io.ktor.features.AutoHeadResponse
 import io.ktor.features.CORS
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
@@ -28,6 +29,7 @@ fun startServer() {
  * サーバーの設定を行う
  */
 fun Application.application() {
+    install(AutoHeadResponse)
     install(ContentNegotiation) {
         json()
     }
