@@ -1,6 +1,7 @@
 import React, { FC, lazy, Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import * as Pages from '../Pages';
+import { AlertProvider } from '../context/AlertContext';
 const Area = lazy(() => import('./pages/Area'));
 const Desk = lazy(() => import('./pages/Desk'));
 const DeskView = lazy(() => import('./pages/DeskView'));
@@ -8,8 +9,8 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 const User = lazy(() => import('./pages/User'));
 
 const App: FC = () => (
-  <div className="app h-full">
-    <div className="h-full flex justify-center items-center">
+  <AlertProvider>
+    <div className="app h-full flex justify-center items-center">
       <Suspense fallback={<></>}>
         <BrowserRouter>
           <Switch>
@@ -22,7 +23,7 @@ const App: FC = () => (
         </BrowserRouter>
       </Suspense>
     </div>
-  </div>
+  </AlertProvider>
 );
 
 export default App;

@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as Pages from '../../Pages';
 import * as api from '../../api/method';
+import { useAlert } from '../../context/AlertContext';
 
 type Params = {
   uuid: string;
@@ -10,6 +11,7 @@ type Params = {
 
 const Desk: FC = () => {
   const { uuid } = useParams<Params>();
+  const alert = useAlert();
   const [checkUserId, setCheckUserId] = useState<number | null>();
   return (
     <div>
@@ -28,7 +30,10 @@ const Desk: FC = () => {
                   const params = `?id=${user_id}&uuid=${user_uuid}`;
                   window.location.href = Pages.DeskView(uuid) + params;
                 })
-                .catch((reason) => console.log(reason));
+                .catch((reason) => {
+                  alert.error('ユーザー作成に失敗しました');
+                  console.error(reason);
+                });
             }}
             className="h-14 w-full"
           >
@@ -45,13 +50,17 @@ const Desk: FC = () => {
             label="ユーザーID"
             onChange={(event) => {
               const value = parseInt(event.target.value);
-              if (value) {
+              if (0 < value) {
                 setCheckUserId(value);
+              } else {
+                setCheckUserId(null);
               }
+              event.preventDefault();
             }}
           />
           <Button
             variant="contained"
+            disabled={!(checkUserId && 0 < checkUserId)}
             onClick={() => {
               if (checkUserId) {
                 api
@@ -62,6 +71,7 @@ const Desk: FC = () => {
                     window.location.href = Pages.DeskView(uuid) + params;
                   })
                   .catch((reason) => {
+                    alert.error('検索に失敗しました');
                     console.error(reason);
                     setCheckUserId(null);
                   });

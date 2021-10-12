@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import QRCode from 'react-qr-code';
 import { useLocation, useParams } from 'react-router-dom';
 import * as Pages from '../../Pages';
+import { useAlert } from '../../context/AlertContext';
 import { getUserURL } from '../../util/user';
 
 type Params = {
@@ -12,11 +13,11 @@ type Params = {
 const DeskView: FC = () => {
   const { uuid } = useParams<Params>();
   const location = useLocation();
+  const alert = useAlert();
   const params = new URLSearchParams(location.search);
   const userUuid = params.get('uuid') || '';
   const userId = params.get('id');
   const userPageUrl = getUserURL(userUuid);
-  console.log(userPageUrl);
   return (
     <div>
       <Typography variant="h5" className="text-center pb-2">
@@ -54,7 +55,7 @@ const DeskView: FC = () => {
           <Button
             variant="contained"
             className="w-5/12"
-            onClick={() => alert('未実装です')} // TODO 印刷処理
+            onClick={() => alert.warning('未実装です')} // TODO 印刷処理
           >
             印刷
           </Button>
