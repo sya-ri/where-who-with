@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import QrReader from 'react-qr-reader';
 import { useParams } from 'react-router-dom';
 import * as api from '../../api/method';
+import { useAlert } from '../../context/AlertContext';
 
 type Params = {
   uuid: string;
@@ -10,6 +11,7 @@ type Params = {
 
 const Area: FC = () => {
   const { uuid } = useParams<Params>();
+  const alert = useAlert();
   const [userUuid, setUserUuid] = useState<string | null>();
   return (
     <div>
@@ -24,6 +26,7 @@ const Area: FC = () => {
             }
           }}
           onError={(error) => {
+            alert.error('読み取りに問題が発生しました');
             console.error(error);
           }}
         />
@@ -45,10 +48,12 @@ const Area: FC = () => {
                 api
                   .postLogJoin({ area_uuid: uuid, user_uuid: userUuid })
                   .then(() => {
+                    alert.success('入室を記録しました');
                     setUserUuid(null);
                   })
-                  .catch((error) => {
-                    console.error(error);
+                  .catch((reason) => {
+                    alert.error('入室記録に失敗しました');
+                    console.error(reason);
                     setUserUuid(null);
                   });
               }
@@ -66,10 +71,12 @@ const Area: FC = () => {
                 api
                   .postLogLeave({ area_uuid: uuid, user_uuid: userUuid })
                   .then(() => {
+                    alert.success('退室を記録しました');
                     setUserUuid(null);
                   })
-                  .catch((error) => {
-                    console.error(error);
+                  .catch((reason) => {
+                    alert.error('退室記録に失敗しました');
+                    console.error(reason);
                     setUserUuid(null);
                   });
               }
