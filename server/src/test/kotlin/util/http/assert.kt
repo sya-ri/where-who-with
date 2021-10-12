@@ -24,3 +24,10 @@ fun assertOK(response: TestApplicationResponse, message: String? = null) {
 fun assertBadRequest(response: TestApplicationResponse, message: String? = null) {
     assertStatusCode(HttpStatusCode.BadRequest, response, message)
 }
+
+/**
+ * [HttpStatusCode.UnsupportedMediaType] であるかのアサートを行う
+ */
+fun assertUnsupportedMediaType(response: TestApplicationResponse, message: String? = null) {
+    assertStatusCode(HttpStatusCode.UnsupportedMediaType, response, message)
+}

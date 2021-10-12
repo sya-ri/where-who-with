@@ -13,6 +13,7 @@ import util.factory.UserFactory
 import util.find
 import util.http.assertBadRequest
 import util.http.assertOK
+import util.http.assertUnsupportedMediaType
 import util.http.jsonBody
 import util.http.jsonContent
 import util.http.testPostRequest
@@ -124,6 +125,26 @@ class HttpRequestTest {
             jsonBody(LogRequest(userUuid, areaUuid))
         }.run {
             assertBadRequest(response)
+        }
+    }
+
+    @Test
+    fun `check empty request`() {
+        listOf(
+            "/user/check",
+            "/user/create",
+            "/log/join",
+            "/log/leave",
+        ).forEach {
+            testPostRequest(it) {
+            }.run {
+                assertUnsupportedMediaType(response)
+            }
+            testPostRequest(it) {
+                jsonBody("")
+            }.run {
+                assertBadRequest(response)
+            }
         }
     }
 }
