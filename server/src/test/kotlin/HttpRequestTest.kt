@@ -129,7 +129,7 @@ class HttpRequestTest {
     }
 
     @Test
-    fun `check empty request`() {
+    fun `empty request can be ignored`() {
         listOf(
             "/user/check",
             "/user/create",
