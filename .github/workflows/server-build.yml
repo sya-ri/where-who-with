@@ -16,7 +16,7 @@ jobs:
           distribution: 'zulu'
           java-version: 11
           cache: gradle
-      - name: Lint
+      - name: Build
         run: cd server && ./gradlew build
       - name: Create Release
         uses: softprops/action-gh-release@v1
