@@ -6,9 +6,9 @@ import * as Pages from '../../Pages';
 import { useAlert } from '../../context/AlertContext';
 import { getUserURL } from '../../util/user';
 
-type Params = {
+interface Params {
   uuid: string;
-};
+}
 
 const DeskView: FC = () => {
   const { uuid } = useParams<Params>();

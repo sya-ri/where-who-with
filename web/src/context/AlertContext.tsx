@@ -3,7 +3,7 @@ import Snackbar from '@mui/material/Snackbar';
 import React, { FC, useState } from 'react';
 import createContext from '../util/createContext';
 
-type AlertContextType = {
+interface AlertContextType {
   /**
    * info アラートを表示する
    * @param message メッセージ
@@ -33,16 +33,16 @@ type AlertContextType = {
   error: (message: string, displayTime?: number) => void;
 
   close: () => void;
-};
+}
 
 type AlertSeverity = 'info' | 'success' | 'warning' | 'error';
 
-type AlertState = {
+interface AlertState {
   open: boolean;
   severity: AlertSeverity;
   message: string;
   closeTimer: number;
-};
+}
 
 const [useAlert, SetAlertProvider] = createContext<AlertContextType>();
 
