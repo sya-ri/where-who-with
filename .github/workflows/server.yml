@@ -1,7 +1,7 @@
 name: Server
 on:
- pull_request:
-   paths:
+  pull_request:
+    paths:
      - 'server/**'
      - '.github/workflows/server.yml'
 jobs:
@@ -32,7 +32,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
-          java-version: 8
+          java-version: 11
           cache: gradle
       - name: Lint
         run: cd server && ./gradlew lintKotlin
