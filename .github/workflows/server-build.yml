@@ -16,11 +16,11 @@ jobs:
           distribution: 'zulu'
           java-version: 11
           cache: gradle
-      - name: Lint
+      - name: Build
         run: cd server && ./gradlew build
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: action-v${{ github.run_number }}
+          tag_name: server/v${{ github.run_number }}
           files: |
             server/build/libs/w3server.jar
