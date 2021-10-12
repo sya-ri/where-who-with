@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+const { DefinePlugin } = require('webpack');
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.config.base.js');
-const { DefinePlugin } = require('webpack');
 
 module.exports = merge(baseConfig, {
   mode: 'production',

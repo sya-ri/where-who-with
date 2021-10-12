@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import QRCode from 'react-qr-code';
-import { getUserURL } from '../../util/user';
 import { Button, TextField, Typography } from '@mui/material';
+import React, { FC } from 'react';
+import QRCode from 'react-qr-code';
+import { useLocation, useParams } from 'react-router-dom';
 import * as Pages from '../../Pages';
+import { getUserURL } from '../../util/user';
 
 type Params = {
   uuid: string;
