@@ -25,7 +25,7 @@ const User: FC = () => {
         </Typography>
       </div>
       <Typography variant="h6" className="text-center pt-4">
-        入退出時にこの画面を見せてください
+        入退室時にこの画面を見せてください
       </Typography>
     </div>
   );

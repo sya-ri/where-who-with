@@ -6,7 +6,7 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 
 /**
- * 入退出記録
+ * 入退室記録
  * @see Logs
  */
 class Log(id: EntityID<Int>) : IntEntity(id) {

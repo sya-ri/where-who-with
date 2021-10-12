@@ -4,7 +4,7 @@ import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.kotlin.datetime.timestamp
 
 /**
- * 入退出記録テーブル
+ * 入退室記録テーブル
  */
 object Logs : IntIdTable("logs") {
     /**
