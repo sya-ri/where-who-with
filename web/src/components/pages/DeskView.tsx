@@ -1,4 +1,5 @@
 import { Button, TextField, Typography } from '@mui/material';
+import { Location } from 'history';
 import React, { FC } from 'react';
 import QRCode from 'react-qr-code';
 import { useLocation, useParams } from 'react-router-dom';
@@ -10,13 +11,20 @@ interface Params {
   uuid: string;
 }
 
+const getUserInfoFromSearch = (
+  location: Location
+): { userId: string; userUuid: string } => {
+  const params = new URLSearchParams(location.search);
+  const userUuid = params.get('uuid') || '';
+  const userId = params.get('id') || '';
+  return { userId, userUuid };
+};
+
 const DeskView: FC = () => {
   const { uuid } = useParams<Params>();
   const location = useLocation();
   const alert = useAlert();
-  const params = new URLSearchParams(location.search);
-  const userUuid = params.get('uuid') || '';
-  const userId = params.get('id');
+  const { userUuid, userId } = getUserInfoFromSearch(location);
   const userPageUrl = getUserURL(userUuid);
   return (
     <div>
