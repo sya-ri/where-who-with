@@ -45,13 +45,17 @@ const Desk: FC = () => {
             label="ユーザーID"
             onChange={(event) => {
               const value = parseInt(event.target.value);
-              if (value) {
+              if (0 < value) {
                 setCheckUserId(value);
+              } else {
+                setCheckUserId(null);
               }
+              event.preventDefault();
             }}
           />
           <Button
             variant="contained"
+            disabled={!(checkUserId && 0 < checkUserId)}
             onClick={() => {
               if (checkUserId) {
                 api
