@@ -1,9 +1,9 @@
-import MuiAlert from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import React, { FC, useState } from 'react';
 import createContext from '../util/createContext';
 
-type AlertContextType = {
+interface AlertContextType {
   /**
    * info アラートを表示する
    * @param message メッセージ
@@ -33,29 +33,36 @@ type AlertContextType = {
   error: (message: string, displayTime?: number) => void;
 
   close: () => void;
-};
+}
 
 type AlertSeverity = 'info' | 'success' | 'warning' | 'error';
 
-type AlertState = {
+interface AlertState {
   open: boolean;
   severity: AlertSeverity;
   message: string;
-  closeTimer: number;
-};
+  closeTimer: number | null;
+}
 
 const [useAlert, SetAlertProvider] = createContext<AlertContextType>();
 
 const useAlertContext = (): { state: AlertState; type: AlertContextType } => {
   const [alertState, setAlertState] = useState<AlertState>({
-    closeTimer: 0,
+    closeTimer: null,
     message: '',
     open: false,
     severity: 'success',
   });
 
   const close = () => {
-    setAlertState((lastState) => ({ ...lastState, open: false }));
+    if (alertState.closeTimer) {
+      clearTimeout(alertState.closeTimer);
+    }
+    setAlertState((lastState) => ({
+      ...lastState,
+      closeTimer: null,
+      open: false,
+    }));
   };
 
   const open = (
@@ -66,7 +73,7 @@ const useAlertContext = (): { state: AlertState; type: AlertContextType } => {
     if (alertState.closeTimer) {
       clearTimeout(alertState.closeTimer);
     }
-    let closeTimer = 0;
+    let closeTimer = null;
     if (displayTime) {
       closeTimer = window.setTimeout(close, displayTime);
     }
@@ -111,9 +118,9 @@ export const AlertProvider: FC = (props) => {
           vertical: 'bottom',
         }}
       >
-        <MuiAlert onClose={type.close} severity={state.severity}>
+        <Alert onClose={type.close} severity={state.severity}>
           {state.message}
-        </MuiAlert>
+        </Alert>
       </Snackbar>
     </SetAlertProvider>
   );

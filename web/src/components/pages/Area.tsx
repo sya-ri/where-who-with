@@ -5,9 +5,9 @@ import { useParams } from 'react-router-dom';
 import * as api from '../../api/method';
 import { useAlert } from '../../context/AlertContext';
 
-type Params = {
+interface Params {
   uuid: string;
-};
+}
 
 const Area: FC = () => {
   const { uuid } = useParams<Params>();
