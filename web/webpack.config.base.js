@@ -9,14 +9,6 @@ const TailwindCss = require('tailwindcss');
 
 module.exports = {
   entry: './src/index.tsx',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
-  },
-  target: ['web', 'es5'],
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json'],
-  },
   module: {
     rules: [
       {
@@ -45,15 +37,22 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimizer: [new HtmlMinimizerPlugin()],
+  },
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './html/index.html',
       inject: false,
+      template: './html/index.html',
     }),
     new HtmlWebpackPlugin({
       filename: '404.html',
-      template: './html/404.html',
       inject: false,
+      template: './html/404.html',
     }),
     new CopyWebpackPlugin({
       patterns: [{ from: 'static' }],
@@ -62,7 +61,8 @@ module.exports = {
       filename: 'index.css',
     }),
   ],
-  optimization: {
-    minimizer: [new HtmlMinimizerPlugin()],
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json'],
   },
+  target: ['web', 'es5'],
 };

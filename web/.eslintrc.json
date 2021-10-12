@@ -1,7 +1,7 @@
 {
   "env": {
-    "es6": true,
     "browser": true,
+    "es6": true,
     "node": true
   },
   "extends": [
@@ -16,10 +16,10 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2021,
     "ecmaFeatures": {
       "jsx": true
     },
+    "ecmaVersion": 2021,
     "sourceType": "module"
   },
   "plugins": [
@@ -27,13 +27,15 @@
     "react",
     "@typescript-eslint",
     "prettier",
-    "import"
+    "import",
+    "sort-keys-fix"
   ],
   "rules": {
-    "react/prop-types": "off",
+    "import/order": ["error", { "alphabetize": { "order": "asc" } }],
     "prettier/prettier": "error",
-    "sort-imports": 0,
-    "import/order": [2, { "alphabetize": { "order": "asc" } }]
+    "react/prop-types": "off",
+    "sort-imports": "off",
+    "sort-keys-fix/sort-keys-fix": "warn"
   },
   "settings": {
     "react": {
