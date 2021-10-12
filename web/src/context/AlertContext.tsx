@@ -41,21 +41,28 @@ interface AlertState {
   open: boolean;
   severity: AlertSeverity;
   message: string;
-  closeTimer: number;
+  closeTimer: number | null;
 }
 
 const [useAlert, SetAlertProvider] = createContext<AlertContextType>();
 
 const useAlertContext = (): { state: AlertState; type: AlertContextType } => {
   const [alertState, setAlertState] = useState<AlertState>({
-    closeTimer: 0,
+    closeTimer: null,
     message: '',
     open: false,
     severity: 'success',
   });
 
   const close = () => {
-    setAlertState((lastState) => ({ ...lastState, open: false }));
+    if (alertState.closeTimer) {
+      clearTimeout(alertState.closeTimer);
+    }
+    setAlertState((lastState) => ({
+      ...lastState,
+      closeTimer: null,
+      open: false,
+    }));
   };
 
   const open = (
@@ -66,7 +73,7 @@ const useAlertContext = (): { state: AlertState; type: AlertContextType } => {
     if (alertState.closeTimer) {
       clearTimeout(alertState.closeTimer);
     }
-    let closeTimer = 0;
+    let closeTimer = null;
     if (displayTime) {
       closeTimer = window.setTimeout(close, displayTime);
     }
