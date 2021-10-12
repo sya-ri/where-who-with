@@ -3,6 +3,8 @@ const { DefinePlugin } = require('webpack');
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.config.base.js');
 
+process.env.NODE_ENV = 'development';
+
 module.exports = merge(baseConfig, {
   devServer: {
     historyApiFallback: true,

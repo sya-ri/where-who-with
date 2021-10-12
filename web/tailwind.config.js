@@ -1,7 +1,7 @@
 module.exports = {
   darkMode: false,
   plugins: [],
-  purge: [],
+  purge: ['src/**/*.tsx', 'html/*.html'],
   theme: {
     extend: {},
   },
