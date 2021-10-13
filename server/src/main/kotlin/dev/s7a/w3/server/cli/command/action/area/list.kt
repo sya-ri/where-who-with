@@ -11,8 +11,10 @@ fun ExecutionPlatform.areaList() {
     val areas = useDatabaseOnce {
         Area.all().toList()
     }
-    println("エリア一覧(${areas.size}):")
-    areas.forEach {
-        println(" - ${it.id}[${it.uuid}]: ${it.name}")
+    printMessage {
+        appendLine("エリア一覧(${areas.size}):")
+        areas.forEach {
+            appendLine(" - ${it.id}[${it.uuid}]: ${it.name}")
+        }
     }
 }

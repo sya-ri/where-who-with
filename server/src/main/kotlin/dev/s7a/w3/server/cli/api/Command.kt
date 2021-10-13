@@ -68,16 +68,6 @@ sealed class Command(
         }
 
         /**
-         * 単純な処理を実行するコマンドを追加する
-         * @param name コマンド名
-         * @param description 説明文
-         * @param action 実行する処理
-         */
-        fun register(name: String, description: String, action: () -> Unit) {
-            register(name, description, fun @Suppress("unused") ExecutionPlatform.() = action())
-        }
-
-        /**
          * 引数を必要とする処理を実行するコマンドを追加する
          * @param name コマンド名
          * @param optionName オプション名
