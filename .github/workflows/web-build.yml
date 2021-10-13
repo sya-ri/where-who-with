@@ -1,4 +1,4 @@
-name: Web - GitHub Pages
+name: Web - Build
 on:
   push:
     branches:
@@ -14,10 +14,10 @@ jobs:
         with:
           node-version: '14.x'
       - name: Build
-        run: cd web && yarn && yarn build
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        run: cd web && yarn && yarn build && zip -j w3web.zip -r dist
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./web/dist
-          cname: w3.kokasai.com
+          tag_name: web/v${{ github.run_number }}
+          files: |
+            web/w3web.zip
