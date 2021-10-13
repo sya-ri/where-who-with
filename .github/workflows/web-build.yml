@@ -5,7 +5,7 @@ on:
       - master
     paths:
       - 'web/**'
-      - '.github/workflows/web.yml'
+      - '.github/workflows/web-build.yml'
 jobs:
   deploy:
     runs-on: ubuntu-latest
