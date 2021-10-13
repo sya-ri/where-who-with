@@ -6,6 +6,15 @@ import kotlin.test.assertFails
 import kotlin.test.assertIs
 
 /**
+ * CSV ファイルが取得されたかのアサートを行う
+ */
+fun assertImportCsv(block: () -> Unit): ExecutionTestPlatform.ImportFromCsvException {
+    val actual = assertFails(block)
+    assertIs<ExecutionTestPlatform.ImportFromCsvException>(actual)
+    return actual
+}
+
+/**
  * CSV ファイルが出力されたかのアサートを行う
  */
 fun assertExportCsv(block: () -> Unit): ExecutionTestPlatform.ExportToCsvException {

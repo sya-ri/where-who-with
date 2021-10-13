@@ -2,10 +2,12 @@ import dev.s7a.w3.server.cli.ErrorCode
 import dev.s7a.w3.server.cli.command.action.area.areaCreate
 import dev.s7a.w3.server.cli.command.action.area.areaDelete
 import dev.s7a.w3.server.cli.command.action.area.areaExport
+import dev.s7a.w3.server.cli.command.action.area.areaImport
 import dev.s7a.w3.server.cli.command.action.area.areaList
 import dev.s7a.w3.server.cli.command.action.desk.deskCreate
 import dev.s7a.w3.server.cli.command.action.desk.deskDelete
 import dev.s7a.w3.server.cli.command.action.desk.deskExport
+import dev.s7a.w3.server.cli.command.action.desk.deskImport
 import dev.s7a.w3.server.cli.command.action.desk.deskList
 import dev.s7a.w3.server.cli.command.action.version
 import dev.s7a.w3.server.database.entity.Area
@@ -15,6 +17,7 @@ import dev.s7a.w3.server.database.table.Desks
 import org.jetbrains.exposed.sql.transactions.transaction
 import util.cli.ExecutionTestPlatform
 import util.cli.assertExportCsv
+import util.cli.assertImportCsv
 import util.cli.assertPrintError
 import util.cli.assertPrintMessage
 import util.cli.assertPrintSuccess
@@ -71,6 +74,13 @@ class CLITest {
     }
 
     @Test
+    fun `desk list can be imported`() {
+        assertImportCsv {
+            ExecutionTestPlatform.deskImport(null)
+        }
+    }
+
+    @Test
     fun `desk list can be exported`() {
         assertExportCsv {
             ExecutionTestPlatform.deskExport(null)
@@ -112,6 +122,13 @@ class CLITest {
     fun `area list can be printed`() {
         assertPrintMessage {
             ExecutionTestPlatform.areaList()
+        }
+    }
+
+    @Test
+    fun `area list can be imported`() {
+        assertImportCsv {
+            ExecutionTestPlatform.areaImport(null)
         }
     }
 

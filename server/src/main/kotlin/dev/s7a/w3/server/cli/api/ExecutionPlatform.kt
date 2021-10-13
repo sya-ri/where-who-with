@@ -1,8 +1,10 @@
 package dev.s7a.w3.server.cli.api
 
+import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import dev.s7a.w3.server.cli.ErrorCode
 import dev.s7a.w3.server.cli.util.ShellColor
+import java.io.File
 import java.lang.StringBuilder
 import kotlin.system.exitProcess
 
@@ -10,6 +12,13 @@ import kotlin.system.exitProcess
  * 実行環境
  */
 interface ExecutionPlatform {
+    /**
+     * CSV ファイルからデータを読み込む
+     */
+    fun importFromCsv(fileName: String): List<Map<String, String>> {
+        return csvReader().readAllWithHeader(File(fileName))
+    }
+
     /**
      * CSV ファイルにデータを書き込む
      */
