@@ -1,10 +1,10 @@
 import { Button, TextField, Typography } from '@mui/material';
 import { Location } from 'history';
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import QRCode from 'react-qr-code';
 import { useLocation, useParams } from 'react-router-dom';
+import ReactToPrint, { useReactToPrint } from 'react-to-print';
 import * as Pages from '../../Pages';
-import { useAlert } from '../../context/AlertContext';
 import { getUserURL } from '../../util/user';
 
 interface Params {
@@ -23,15 +23,18 @@ const getUserInfoFromSearch = (
 const DeskView: FC = () => {
   const { uuid } = useParams<Params>();
   const location = useLocation();
-  const alert = useAlert();
   const { userUuid, userId } = getUserInfoFromSearch(location);
   const userPageUrl = getUserURL(userUuid);
+  const componentRef = useRef<HTMLDivElement>(null);
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
   return (
     <div>
       <Typography variant="h5" className="text-center pb-2">
         受付確認画面
       </Typography>
-      <div className="p-4 pb-2">
+      <div ref={componentRef} className="p-4 pb-2">
         <div className="flex justify-center pb-2">
           <QRCode value={userPageUrl} />
         </div>
@@ -60,13 +63,18 @@ const DeskView: FC = () => {
           >
             戻る
           </Button>
-          <Button
-            variant="contained"
-            className="w-5/12"
-            onClick={() => alert.warning('未実装です')} // TODO 印刷処理
-          >
-            印刷
-          </Button>
+          <ReactToPrint
+            trigger={() => (
+              <Button
+                variant="contained"
+                className="w-5/12"
+                onClick={handlePrint}
+              >
+                印刷
+              </Button>
+            )}
+            content={() => componentRef.current}
+          />
         </div>
       </div>
     </div>
