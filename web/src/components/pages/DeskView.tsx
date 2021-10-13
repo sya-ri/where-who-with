@@ -36,7 +36,9 @@ const DeskView: FC = () => {
       </Typography>
       <div ref={componentRef} className="py-2">
         <div className="flex justify-center pb-2">
-          <QRCode value={userPageUrl} />
+          <a href={userPageUrl}>
+            <QRCode value={userPageUrl} />
+          </a>
         </div>
         <Typography variant="body2" className="text-gray-600 text-center">
           {userUuid}
