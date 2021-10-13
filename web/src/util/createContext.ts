@@ -1,6 +1,6 @@
 import React, { Provider } from 'react';
 
-const createContext = <ContextType extends unknown>(): readonly [
+const createContext = <ContextType>(): readonly [
   () => ContextType,
   Provider<ContextType | undefined>
 ] => {
