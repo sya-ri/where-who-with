@@ -9,7 +9,7 @@ plugins {
     kotlin("jvm") version "1.5.31"
     kotlin("plugin.serialization") version "1.5.31"
     id("org.jmailen.kotlinter") version "3.6.0"
-    id("com.github.johnrengelman.shadow") version "7.0.0"
+    id("com.github.johnrengelman.shadow") version "7.1.0"
     id("com.github.ben-manes.versions") version "0.39.0"
     id("com.palantir.git-version") version "0.12.3"
     id("org.hidetake.swagger.generator") version "2.18.2"
@@ -49,10 +49,10 @@ dependencies {
     shadowImplementation(kotlin("stdlib"))
 
     // データベース
-    shadowImplementation("org.jetbrains.exposed:exposed-core:0.35.1")
-    shadowImplementation("org.jetbrains.exposed:exposed-dao:0.35.1")
-    shadowImplementation("org.jetbrains.exposed:exposed-jdbc:0.35.1")
-    shadowImplementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.35.1")
+    shadowImplementation("org.jetbrains.exposed:exposed-core:0.35.2")
+    shadowImplementation("org.jetbrains.exposed:exposed-dao:0.35.2")
+    shadowImplementation("org.jetbrains.exposed:exposed-jdbc:0.35.2")
+    shadowImplementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.35.2")
     shadowRuntimeOnly("org.xerial:sqlite-jdbc:3.36.0.3")
 
     // ロガー
@@ -63,9 +63,9 @@ dependencies {
     shadowImplementation("org.jline:jline-builtins:3.20.0")
 
     // サーバー
-    shadowImplementation("io.ktor:ktor-server-cio:1.6.3")
-    shadowImplementation("io.ktor:ktor-serialization:1.6.3")
-    shadowImplementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
+    shadowImplementation("io.ktor:ktor-server-cio:1.6.4")
+    shadowImplementation("io.ktor:ktor-serialization:1.6.4")
+    shadowImplementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.0")
 
     // CSV
     shadowImplementation("com.github.doyaaaaaken:kotlin-csv-jvm:1.1.0")
@@ -74,10 +74,10 @@ dependencies {
     testImplementation(kotlin("test"))
 
     // サーバーテスト
-    testImplementation("io.ktor:ktor-server-test-host:1.6.3")
+    testImplementation("io.ktor:ktor-server-test-host:1.6.4")
 
     // API ドキュメントの生成
-    swaggerUI("org.webjars:swagger-ui:3.52.1")
+    swaggerUI("org.webjars:swagger-ui:3.52.3")
 }
 
 /*
