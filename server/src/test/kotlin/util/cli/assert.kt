@@ -6,7 +6,16 @@ import kotlin.test.assertFails
 import kotlin.test.assertIs
 
 /**
- *
+ * CSV ファイルが出力されたかのアサートを行う
+ */
+fun assertExportCsv(block: () -> Unit): ExecutionTestPlatform.ExportToCsvException {
+    val actual = assertFails(block)
+    assertIs<ExecutionTestPlatform.ExportToCsvException>(actual)
+    return actual
+}
+
+/**
+ * メッセージが表示されたかのアサートを行う
  */
 fun assertPrintMessage(block: () -> Unit): ExecutionTestPlatform.PrintMessageException {
     val actual = assertFails(block)
@@ -15,7 +24,7 @@ fun assertPrintMessage(block: () -> Unit): ExecutionTestPlatform.PrintMessageExc
 }
 
 /**
- * 実行エラーのアサートを行う
+ * 成功メッセージが表示されたかのアサートを行う
  */
 fun assertPrintSuccess(block: () -> Unit): ExecutionTestPlatform.PrintSuccessException {
     val actual = assertFails(block)
@@ -24,7 +33,7 @@ fun assertPrintSuccess(block: () -> Unit): ExecutionTestPlatform.PrintSuccessExc
 }
 
 /**
- * 実行エラーのアサートを行う
+ * エラーメッセージが表示されたかのアサートを行う
  */
 fun assertPrintError(expected: ErrorCode, block: () -> Unit): ExecutionTestPlatform.PrintErrorException {
     val actual = assertFails(block)

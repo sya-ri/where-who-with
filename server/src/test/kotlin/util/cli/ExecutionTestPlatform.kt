@@ -8,6 +8,11 @@ import dev.s7a.w3.server.cli.api.ExecutionPlatform
  */
 object ExecutionTestPlatform : ExecutionPlatform {
     /**
+     * [exportToCsv] を実行したことを表す例外
+     */
+    class ExportToCsvException(val fileName: String, val data: List<List<Any?>>) : Exception()
+
+    /**
      * [printMessage] を実行したことを表す例外
      */
     class PrintMessageException(message: String) : Exception(message)
@@ -21,6 +26,10 @@ object ExecutionTestPlatform : ExecutionPlatform {
      * エラーで終了したことを表す例外
      */
     class PrintErrorException(val errorCode: ErrorCode, message: String) : Exception(message)
+
+    override fun exportToCsv(fileName: String, data: List<List<Any?>>) {
+        throw ExportToCsvException(fileName, data)
+    }
 
     override fun printMessage(message: String) {
         throw PrintMessageException(message)

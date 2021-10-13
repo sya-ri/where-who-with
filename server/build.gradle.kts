@@ -67,6 +67,9 @@ dependencies {
     shadowImplementation("io.ktor:ktor-serialization:1.6.3")
     shadowImplementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
 
+    // CSV
+    shadowImplementation("com.github.doyaaaaaken:kotlin-csv-jvm:1.1.0")
+
     // テスト
     testImplementation(kotlin("test"))
 
