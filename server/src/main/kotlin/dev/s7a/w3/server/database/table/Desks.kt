@@ -15,7 +15,7 @@ object Desks : IntIdTable("desks") {
     /**
      * 識別子
      */
-    val uuid = uuid("uuid").clientDefault(UUID::randomUUID)
+    val uuid = uuid("uuid").clientDefault(UUID::randomUUID).uniqueIndex()
 
     /**
      * 名前

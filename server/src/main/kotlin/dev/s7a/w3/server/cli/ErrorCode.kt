@@ -32,7 +32,12 @@ enum class ErrorCode {
     /**
      * 既に対話モードで実行されている
      */
-    PlatformAlreadyInteract;
+    PlatformAlreadyInteract,
+
+    /**
+     * インポートでエラーが発生した
+     */
+    ImportError;
 
     /**
      * 終了コード
