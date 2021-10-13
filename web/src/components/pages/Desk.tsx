@@ -13,6 +13,22 @@ const Desk: FC = () => {
   const { uuid } = useParams<Params>();
   const alert = useAlert();
   const [checkUserId, setCheckUserId] = useState<number | null>();
+  const search = () => {
+    if (checkUserId) {
+      api
+        .postUserCheck({ desk_uuid: uuid, user_id: checkUserId })
+        .then((response) => {
+          const { user_uuid } = response.data;
+          const params = `?id=${checkUserId}&uuid=${user_uuid}`;
+          window.location.href = Pages.DeskView(uuid) + params;
+        })
+        .catch((reason) => {
+          alert.error('検索に失敗しました');
+          console.error(reason);
+          setCheckUserId(null);
+        });
+    }
+  };
   return (
     <div>
       <Typography variant="h5" className="text-center pb-2">
@@ -48,6 +64,11 @@ const Desk: FC = () => {
             type="number"
             value={checkUserId}
             label="ユーザーID"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                search();
+              }
+            }}
             onChange={(event) => {
               const value = parseInt(event.target.value);
               if (0 < value) {
@@ -58,26 +79,7 @@ const Desk: FC = () => {
               event.preventDefault();
             }}
           />
-          <Button
-            variant="contained"
-            disabled={!(checkUserId && 0 < checkUserId)}
-            onClick={() => {
-              if (checkUserId) {
-                api
-                  .postUserCheck({ desk_uuid: uuid, user_id: checkUserId })
-                  .then((response) => {
-                    const { user_uuid } = response.data;
-                    const params = `?id=${checkUserId}&uuid=${user_uuid}`;
-                    window.location.href = Pages.DeskView(uuid) + params;
-                  })
-                  .catch((reason) => {
-                    alert.error('検索に失敗しました');
-                    console.error(reason);
-                    setCheckUserId(null);
-                  });
-              }
-            }}
-          >
+          <Button variant="contained" disabled={!checkUserId} onClick={search}>
             検索
           </Button>
         </div>
