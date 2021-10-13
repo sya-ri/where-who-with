@@ -31,10 +31,10 @@ const DeskView: FC = () => {
   });
   return (
     <div>
-      <Typography variant="h5" className="text-center pb-2">
+      <Typography variant="h5" className="text-center pb-4">
         受付確認画面
       </Typography>
-      <div ref={componentRef} className="p-4 pb-2">
+      <div ref={componentRef} className="py-2">
         <div className="flex justify-center pb-2">
           <QRCode value={userPageUrl} />
         </div>
