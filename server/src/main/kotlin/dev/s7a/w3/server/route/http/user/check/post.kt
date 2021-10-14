@@ -12,7 +12,6 @@ import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.util.pipeline.PipelineContext
-import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.transactions.transaction
 
 /**
@@ -23,11 +22,11 @@ import org.jetbrains.exposed.sql.transactions.transaction
 suspend fun PipelineContext<Unit, ApplicationCall>.userCheckPost() {
     val request = call.receiveOrRespondBadRequest<UserCheckRequest>() ?: return
     val user = transaction {
-        val desk = Desk.find { Desks.uuid eq request.deskUuid }.limit(1).firstOrNull()
-        desk?.let {
-            User.find {
-                (Users.id eq request.userId) and (Users.deskId eq desk.id)
-            }.limit(1).firstOrNull()
+        val notExist = Desk.find { Desks.uuid eq request.deskUuid }.limit(1).empty()
+        if (notExist) {
+            null
+        } else {
+            User.find { Users.id eq request.userId }.limit(1).firstOrNull()
         }
     } ?: return call.respond(HttpStatusCode.BadRequest)
     call.respond(UserCheckResponse(user))
