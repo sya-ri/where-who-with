@@ -5,14 +5,15 @@
     "node": true
   },
   "extends": [
-    "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
-    "prettier"
+    "plugin:react-hooks/recommended",
+    "plugin:react/recommended",
+    "plugin:tailwindcss/recommended",
+    "prettier",
+    "eslint:recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -23,12 +24,13 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react-hooks",
-    "react",
     "@typescript-eslint",
-    "prettier",
     "import",
-    "sort-keys-fix"
+    "prettier",
+    "react",
+    "sort-keys-fix",
+    "tailwindcss",
+    "react-hooks"
   ],
   "rules": {
     "import/order": ["error", { "alphabetize": { "order": "asc" } }],

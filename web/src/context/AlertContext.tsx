@@ -3,6 +3,7 @@ import Snackbar from '@mui/material/Snackbar';
 import React, { FC, useState } from 'react';
 import createContext from '../util/createContext';
 
+/* eslint-disable no-unused-vars */
 interface AlertContextType {
   /**
    * info アラートを表示する
@@ -34,6 +35,7 @@ interface AlertContextType {
 
   close: () => void;
 }
+/* eslint-enable no-unused-vars */
 
 type AlertSeverity = 'info' | 'success' | 'warning' | 'error';
 

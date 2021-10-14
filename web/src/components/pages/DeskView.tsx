@@ -30,9 +30,9 @@ const DeskView: FC = () => {
     content: () => componentRef.current,
   });
   return (
-    <div className="h-full flex justify-center items-center">
+    <div className="flex justify-center items-center h-full">
       <div>
-        <Typography variant="h5" className="text-center pb-4">
+        <Typography variant="h5" className="pb-4 text-center">
           受付確認画面
         </Typography>
         <div ref={componentRef} className="py-2">
@@ -41,11 +41,11 @@ const DeskView: FC = () => {
               <QRCode value={userPageUrl} />
             </a>
           </div>
-          <Typography variant="body2" className="text-gray-600 text-center">
+          <Typography variant="body2" className="text-center text-gray-600">
             {userUuid}
           </Typography>
         </div>
-        <div className="text-center w-5/6 mx-auto pt-4">
+        <div className="pt-4 mx-auto w-5/6 text-center">
           <TextField
             label="ID"
             type="number"
