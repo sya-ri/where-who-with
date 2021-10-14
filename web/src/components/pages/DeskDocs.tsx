@@ -6,7 +6,7 @@ import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 import QRCode from 'react-qr-code';
 import { useLocation, useParams } from 'react-router-dom';
-import * as Pages from '../../Pages';
+import * as Paths from '../../Paths';
 import DocsSection from '../parts/DocsSection';
 import DocsSubSection from '../parts/DocsSubSection';
 import DocsTemplate from '../templates/DocsTemplate';
@@ -20,7 +20,7 @@ const DeskDocs: FC = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const name = params.get('name');
-  const url = Pages.Desk(uuid);
+  const url = Paths.Desk(uuid);
   return (
     <DocsTemplate>
       {name && (

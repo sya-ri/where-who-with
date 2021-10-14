@@ -1,7 +1,7 @@
 import { Button, TextField, Typography } from '@mui/material';
 import React, { FC, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import * as Pages from '../../Pages';
+import * as Paths from '../../Paths';
 import * as api from '../../api/method';
 import { useAlert } from '../../context/AlertContext';
 
@@ -20,7 +20,7 @@ const Desk: FC = () => {
         .then((response) => {
           const { user_uuid } = response.data;
           const params = `?id=${checkUserId}&uuid=${user_uuid}`;
-          window.location.href = Pages.DeskView(uuid) + params;
+          window.location.href = Paths.DeskView(uuid) + params;
         })
         .catch((reason) => {
           alert.error('検索に失敗しました');
@@ -45,7 +45,7 @@ const Desk: FC = () => {
                   .then((response) => {
                     const { user_id, user_uuid } = response.data;
                     const params = `?id=${user_id}&uuid=${user_uuid}`;
-                    window.location.href = Pages.DeskView(uuid) + params;
+                    window.location.href = Paths.DeskView(uuid) + params;
                   })
                   .catch((reason) => {
                     alert.error('ユーザー作成に失敗しました');

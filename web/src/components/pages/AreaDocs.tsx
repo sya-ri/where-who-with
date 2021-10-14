@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 import QRCode from 'react-qr-code';
 import { useLocation, useParams } from 'react-router-dom';
-import * as Pages from '../../Pages';
+import * as Paths from '../../Paths';
 import DocsSection from '../parts/DocsSection';
 import DocsSubSection from '../parts/DocsSubSection';
 import DocsTemplate from '../templates/DocsTemplate';
@@ -18,7 +18,7 @@ const AreaDocs: FC = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const name = params.get('name');
-  const url = Pages.Area(uuid);
+  const url = Paths.Area(uuid);
   return (
     <DocsTemplate>
       {name && (

@@ -4,7 +4,7 @@ import React, { FC, useRef } from 'react';
 import QRCode from 'react-qr-code';
 import { useLocation, useParams } from 'react-router-dom';
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
-import * as Pages from '../../Pages';
+import * as Paths from '../../Paths';
 import { getUserURL } from '../../util/user';
 
 interface Params {
@@ -60,7 +60,7 @@ const DeskView: FC = () => {
             <Button
               variant="outlined"
               onClick={() => {
-                window.location.href = Pages.Desk(uuid);
+                window.location.href = Paths.Desk(uuid);
               }}
               className="w-5/12"
             >
