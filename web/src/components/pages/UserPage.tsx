@@ -1,15 +1,14 @@
 import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 import QRCode from 'react-qr-code';
-import { useParams } from 'react-router-dom';
 import { getUserURL } from '../../util/user';
 
-interface Params {
+interface Props {
   uuid: string;
 }
 
-const User: FC = () => {
-  const { uuid } = useParams<Params>();
+const UserPage: FC<Props> = (props) => {
+  const { uuid } = props;
   const url = getUserURL(uuid);
   return (
     <div className="flex justify-center items-center h-full">
@@ -33,4 +32,4 @@ const User: FC = () => {
   );
 };
 
-export default User;
+export default UserPage;

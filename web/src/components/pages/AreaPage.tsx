@@ -1,16 +1,15 @@
 import { Button, Typography } from '@mui/material';
 import React, { FC, useState } from 'react';
 import QrReader from 'react-qr-reader';
-import { useParams } from 'react-router-dom';
 import * as api from '../../api/method';
 import { useAlert } from '../../context/AlertContext';
 
-interface Params {
+interface Props {
   uuid: string;
 }
 
-const Area: FC = () => {
-  const { uuid } = useParams<Params>();
+const AreaPage: FC<Props> = (props) => {
+  const { uuid } = props;
   const alert = useAlert();
   const [userUuid, setUserUuid] = useState<string | null>();
   return (
@@ -93,4 +92,4 @@ const Area: FC = () => {
   );
 };
 
-export default Area;
+export default AreaPage;

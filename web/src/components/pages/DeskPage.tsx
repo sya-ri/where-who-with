@@ -1,16 +1,15 @@
 import { Button, TextField, Typography } from '@mui/material';
 import React, { FC, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import * as Paths from '../../Paths';
 import * as api from '../../api/method';
 import { useAlert } from '../../context/AlertContext';
 
-interface Params {
+interface Props {
   uuid: string;
 }
 
-const Desk: FC = () => {
-  const { uuid } = useParams<Params>();
+const DeskPage: FC<Props> = (props) => {
+  const { uuid } = props;
   const alert = useAlert();
   const [checkUserId, setCheckUserId] = useState<number | null>();
   const search = () => {
@@ -94,4 +93,4 @@ const Desk: FC = () => {
   );
 };
 
-export default Desk;
+export default DeskPage;

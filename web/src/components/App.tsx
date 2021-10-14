@@ -2,13 +2,13 @@ import React, { FC, lazy, Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import * as Paths from '../Paths';
 import { AlertProvider } from '../context/AlertContext';
-const Area = lazy(() => import('./pages/Area'));
-const AreaDocs = lazy(() => import('./pages/AreaDocs'));
-const Desk = lazy(() => import('./pages/Desk'));
-const DeskView = lazy(() => import('./pages/DeskView'));
-const DeskDocs = lazy(() => import('./pages/DeskDocs'));
-const NotFound = lazy(() => import('./pages/NotFound'));
-const User = lazy(() => import('./pages/User'));
+const Area = lazy(() => import('./routes/AreaRoute'));
+const AreaDocs = lazy(() => import('./routes/AreaDocsRoute'));
+const Desk = lazy(() => import('./routes/DeskRoute'));
+const DeskView = lazy(() => import('./routes/DeskViewRoute'));
+const DeskDocs = lazy(() => import('./routes/DeskDocsRoute'));
+const NotFound = lazy(() => import('./pages/NotFoundPage'));
+const User = lazy(() => import('./routes/UserRoute'));
 
 const App: FC = () => (
   <AlertProvider>

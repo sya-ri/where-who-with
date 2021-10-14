@@ -3,21 +3,18 @@ import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 import QRCode from 'react-qr-code';
-import { useLocation, useParams } from 'react-router-dom';
 import * as Paths from '../../Paths';
 import DocsSection from '../parts/DocsSection';
 import DocsSubSection from '../parts/DocsSubSection';
 import DocsTemplate from '../templates/DocsTemplate';
 
-interface Params {
+interface Props {
+  name: string | null;
   uuid: string;
 }
 
-const AreaDocs: FC = () => {
-  const { uuid } = useParams<Params>();
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const name = params.get('name');
+const AreaDocsPage: FC<Props> = (props) => {
+  const { name, uuid } = props;
   const url = Paths.Area(uuid);
   return (
     <DocsTemplate>
@@ -51,4 +48,4 @@ const AreaDocs: FC = () => {
   );
 };
 
-export default AreaDocs;
+export default AreaDocsPage;
