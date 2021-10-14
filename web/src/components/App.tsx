@@ -10,7 +10,7 @@ const User = lazy(() => import('./pages/User'));
 
 const App: FC = () => (
   <AlertProvider>
-    <div className="app h-full flex justify-center items-center">
+    <div className="app h-full">
       <Suspense fallback={<></>}>
         <BrowserRouter>
           <Switch>
