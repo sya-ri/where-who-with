@@ -12,7 +12,7 @@ const User = lazy(() => import('./pages/User'));
 
 const App: FC = () => (
   <AlertProvider>
-    <div className="app h-full">
+    <div className="h-full">
       <Suspense fallback={<></>}>
         <BrowserRouter>
           <Switch>

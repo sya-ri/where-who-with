@@ -30,13 +30,13 @@ const Desk: FC = () => {
     }
   };
   return (
-    <div className="h-full flex justify-center items-center">
+    <div className="flex justify-center items-center h-full">
       <div>
-        <Typography variant="h5" className="text-center pb-2">
+        <Typography variant="h5" className="pb-2 text-center">
           受付画面
         </Typography>
-        <div className="border-b border-gray-400 py-4">
-          <div className="text-center mx-auto">
+        <div className="py-4 border-b border-gray-400">
+          <div className="mx-auto text-center">
             <Button
               variant="contained"
               onClick={() => {
@@ -52,7 +52,7 @@ const Desk: FC = () => {
                     console.error(reason);
                   });
               }}
-              className="h-14 w-full"
+              className="w-full h-14"
             >
               新しくユーザーを作成する
             </Button>

@@ -24,7 +24,7 @@ const DeskDocs: FC = () => {
   return (
     <DocsTemplate>
       {name && (
-        <Typography variant="body2" className="text-gray-600 text-right">
+        <Typography variant="body2" className="text-right text-gray-600">
           {name}
         </Typography>
       )}

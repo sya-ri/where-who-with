@@ -14,12 +14,12 @@ const Area: FC = () => {
   const alert = useAlert();
   const [userUuid, setUserUuid] = useState<string | null>();
   return (
-    <div className="h-full flex justify-center items-center">
+    <div className="flex justify-center items-center h-full">
       <div>
-        <Typography variant="h5" className="text-center pb-2">
+        <Typography variant="h5" className="pb-2 text-center">
           入退室記録
         </Typography>
-        <div className="m-auto w-64 pt-4">
+        <div className="pt-4 m-auto w-64">
           <QrReader
             onScan={(data) => {
               if (data) {
@@ -35,7 +35,7 @@ const Area: FC = () => {
         <div>
           <Typography
             variant="body2"
-            className="text-gray-600 text-center pt-2 pb-4"
+            className="pt-2 pb-4 text-center text-gray-600"
           >
             {userUuid || 'QRコードをスキャンしてください'}
           </Typography>
