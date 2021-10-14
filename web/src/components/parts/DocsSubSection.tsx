@@ -1,9 +1,10 @@
-import { SvgIcon, Typography } from '@mui/material';
+import { SvgIconComponent } from '@mui/icons-material';
+import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 
 interface Props {
   title: string;
-  icon: typeof SvgIcon;
+  icon: SvgIconComponent;
 }
 
 const DocsSubSection: FC<Props> = ({ title, icon, children }) => (
