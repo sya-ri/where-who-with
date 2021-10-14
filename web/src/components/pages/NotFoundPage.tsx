@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 
-const NotFound: FC = () => (
+const NotFoundPage: FC = () => (
   <div className="flex justify-center items-center h-full">
     <div className="text-center">
       <Typography variant="h2">404</Typography>
@@ -10,4 +10,4 @@ const NotFound: FC = () => (
   </div>
 );
 
-export default NotFound;
+export default NotFoundPage;

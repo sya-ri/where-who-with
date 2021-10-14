@@ -1,29 +1,18 @@
 import { Button, TextField, Typography } from '@mui/material';
-import { Location } from 'history';
 import React, { FC, useRef } from 'react';
 import QRCode from 'react-qr-code';
-import { useLocation, useParams } from 'react-router-dom';
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
-import * as Pages from '../../Pages';
+import * as Paths from '../../Paths';
 import { getUserURL } from '../../util/user';
 
-interface Params {
+interface Props {
   uuid: string;
+  userUuid: string;
+  userId: string;
 }
 
-const getUserInfoFromSearch = (
-  location: Location
-): { userId: string; userUuid: string } => {
-  const params = new URLSearchParams(location.search);
-  const userUuid = params.get('uuid') || '';
-  const userId = params.get('id') || '';
-  return { userId, userUuid };
-};
-
-const DeskView: FC = () => {
-  const { uuid } = useParams<Params>();
-  const location = useLocation();
-  const { userUuid, userId } = getUserInfoFromSearch(location);
+const DeskViewPage: FC<Props> = (props) => {
+  const { uuid, userUuid, userId } = props;
   const userPageUrl = getUserURL(userUuid);
   const componentRef = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({
@@ -60,7 +49,7 @@ const DeskView: FC = () => {
             <Button
               variant="outlined"
               onClick={() => {
-                window.location.href = Pages.Desk(uuid);
+                window.location.href = Paths.Desk(uuid);
               }}
               className="w-5/12"
             >
@@ -85,4 +74,4 @@ const DeskView: FC = () => {
   );
 };
 
-export default DeskView;
+export default DeskViewPage;

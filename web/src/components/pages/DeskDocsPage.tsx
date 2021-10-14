@@ -5,22 +5,19 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 import QRCode from 'react-qr-code';
-import { useLocation, useParams } from 'react-router-dom';
-import * as Pages from '../../Pages';
+import * as Paths from '../../Paths';
 import DocsSection from '../parts/DocsSection';
 import DocsSubSection from '../parts/DocsSubSection';
 import DocsTemplate from '../templates/DocsTemplate';
 
-interface Params {
+interface Props {
+  name: string | null;
   uuid: string;
 }
 
-const DeskDocs: FC = () => {
-  const { uuid } = useParams<Params>();
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const name = params.get('name');
-  const url = Pages.Desk(uuid);
+const DeskDocsPage: FC<Props> = (props) => {
+  const { name, uuid } = props;
+  const url = Paths.Desk(uuid);
   return (
     <DocsTemplate>
       {name && (
@@ -57,4 +54,4 @@ const DeskDocs: FC = () => {
   );
 };
 
-export default DeskDocs;
+export default DeskDocsPage;
