@@ -45,14 +45,14 @@ class HttpRequestTest {
     }
 
     @Test
-    fun `user check from another desk rejected`() {
+    fun `user can be checked from another desk`() {
         val (desk, user) = transaction {
             DeskFactory.create() to UserFactory.create()
         }
         testPostRequest("/user/check") {
             jsonBody(UserCheckRequest(desk, user))
         }.run {
-            assertBadRequest(response)
+            assertOK(response)
         }
     }
 
