@@ -1,3 +1,4 @@
+export const Index = '/';
 export const Area = (uuid: string): string => `/area/${uuid}`;
 export const AreaDocs = (uuid: string): string => `${Area(uuid)}/docs`;
 export const Desk = (uuid: string): string => `/desk/${uuid}`;
