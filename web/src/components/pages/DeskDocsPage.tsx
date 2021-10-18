@@ -26,11 +26,11 @@ const DeskDocsPage: FC<Props> = (props) => {
           {name}
         </Typography>
       )}
-      <DocsSection title="1. ページにアクセスする">
+      <DocsSection title="事前にページにアクセスする">
         <QRCode value={url} size={96} />
         <Typography className="pt-2">QRコードからアクセスする。</Typography>
       </DocsSection>
-      <DocsSection title="2. 受付確認画面を表示する">
+      <DocsSection title="1. 受付確認画面を表示する">
         <DocsSubSection title="ユーザーの追加" icon={PersonAddIcon}>
           「新しくユーザーを作成する」を押す。
         </DocsSubSection>
@@ -38,7 +38,7 @@ const DeskDocsPage: FC<Props> = (props) => {
           「ユーザーID」を入力し「検索」を押す。ユーザーを作成した時と同じ画面が表示される。
         </DocsSubSection>
       </DocsSection>
-      <DocsSection title="3. ユーザーにQRコードを渡す">
+      <DocsSection title="2. ユーザーにQRコードを渡す">
         <DocsSubSection title="携帯を使う" icon={PhoneIphoneIcon}>
           ユーザーにQRコードを読み取ってもらう。カメラアプリから読み取ることができる。
         </DocsSubSection>
@@ -46,7 +46,7 @@ const DeskDocsPage: FC<Props> = (props) => {
           「印刷」を押して、紙を渡す。
         </DocsSubSection>
       </DocsSection>
-      <DocsSection title="4. 書類にIDを記入する">
+      <DocsSection title="3. 書類にIDを記入する">
         <Typography>
           個人を特定できる書類とユーザーに渡す書類に表示されたIDを記入する。
         </Typography>
