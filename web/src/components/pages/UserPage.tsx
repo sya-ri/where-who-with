@@ -1,8 +1,10 @@
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 import QRCode from 'react-qr-code';
 import * as Paths from '../../Paths';
 import { getCurrentUrl } from '../../util/url';
+import FooterIcon from '../parts/FooterIcon';
 
 interface Props {
   uuid: string;
@@ -29,6 +31,7 @@ const UserPage: FC<Props> = (props) => {
           入退室時にこの画面を見せてください
         </Typography>
       </div>
+      <FooterIcon href={Paths.Index} icon={MenuBookIcon} tooltip="配布資料" />
     </div>
   );
 };

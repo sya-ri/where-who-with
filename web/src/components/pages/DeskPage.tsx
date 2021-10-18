@@ -1,8 +1,10 @@
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { Button, TextField, Typography } from '@mui/material';
 import React, { FC, useState } from 'react';
 import * as Paths from '../../Paths';
 import * as api from '../../api/method';
 import { useAlert } from '../../context/AlertContext';
+import FooterIcon from '../parts/FooterIcon';
 
 interface Props {
   uuid: string;
@@ -89,6 +91,11 @@ const DeskPage: FC<Props> = (props) => {
           </div>
         </div>
       </div>
+      <FooterIcon
+        href={Paths.DeskDocs(uuid)}
+        icon={MenuBookIcon}
+        tooltip="説明資料"
+      />
     </div>
   );
 };

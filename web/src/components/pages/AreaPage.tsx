@@ -1,8 +1,11 @@
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { Button, Typography } from '@mui/material';
 import React, { FC, useState } from 'react';
 import QrReader from 'react-qr-reader';
+import * as Paths from '../../Paths';
 import * as api from '../../api/method';
 import { useAlert } from '../../context/AlertContext';
+import FooterIcon from '../parts/FooterIcon';
 
 interface Props {
   uuid: string;
@@ -88,6 +91,11 @@ const AreaPage: FC<Props> = (props) => {
           </div>
         </div>
       </div>
+      <FooterIcon
+        href={Paths.AreaDocs(uuid)}
+        icon={MenuBookIcon}
+        tooltip="説明資料"
+      />
     </div>
   );
 };
