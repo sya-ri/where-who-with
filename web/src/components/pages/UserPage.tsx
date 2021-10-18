@@ -1,7 +1,8 @@
 import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 import QRCode from 'react-qr-code';
-import { getUserURL } from '../../util/user';
+import * as Paths from '../../Paths';
+import { getCurrentUrl } from '../../util/url';
 
 interface Props {
   uuid: string;
@@ -9,7 +10,7 @@ interface Props {
 
 const UserPage: FC<Props> = (props) => {
   const { uuid } = props;
-  const url = getUserURL(uuid);
+  const url = getCurrentUrl() + Paths.User(uuid);
   return (
     <div className="flex justify-center items-center h-full">
       <div>
