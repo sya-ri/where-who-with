@@ -6,6 +6,7 @@ import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 import QRCode from 'react-qr-code';
 import * as Paths from '../../Paths';
+import { getCurrentUrl } from '../../util/url';
 import DocsSection from '../parts/DocsSection';
 import DocsSubSection from '../parts/DocsSubSection';
 import DocsTemplate from '../templates/DocsTemplate';
@@ -17,7 +18,7 @@ interface Props {
 
 const DeskDocsPage: FC<Props> = (props) => {
   const { name, uuid } = props;
-  const url = Paths.Desk(uuid);
+  const url = getCurrentUrl() + Paths.Desk(uuid);
   return (
     <DocsTemplate>
       {name && (

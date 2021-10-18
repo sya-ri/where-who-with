@@ -3,7 +3,7 @@ import React, { FC, useRef } from 'react';
 import QRCode from 'react-qr-code';
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
 import * as Paths from '../../Paths';
-import { getUserURL } from '../../util/user';
+import { getCurrentUrl } from '../../util/url';
 
 interface Props {
   uuid: string;
@@ -13,7 +13,7 @@ interface Props {
 
 const DeskViewPage: FC<Props> = (props) => {
   const { uuid, userUuid, userId } = props;
-  const userPageUrl = getUserURL(userUuid);
+  const url = getCurrentUrl() + Paths.User(uuid);
   const componentRef = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -26,8 +26,8 @@ const DeskViewPage: FC<Props> = (props) => {
         </Typography>
         <div ref={componentRef} className="py-2">
           <div className="flex justify-center pb-2">
-            <a href={userPageUrl}>
-              <QRCode value={userPageUrl} />
+            <a href={url}>
+              <QRCode value={url} />
             </a>
           </div>
           <Typography variant="body2" className="text-center text-gray-600">
