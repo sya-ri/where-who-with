@@ -10,9 +10,8 @@ import dev.s7a.w3.server.database.table.Desks
  * 受付の一覧を一括追加する
  */
 fun ExecutionPlatform.deskImport(_name: String?) {
-    val fileName = _name ?: "areaList.csv"
+    val fileName = _name ?: "deskList.csv"
     val list = importFromCsv(fileName)
-    println(list)
     val successList = mutableListOf<Int>()
     val errorList = mutableListOf<String>()
     useDatabaseOnce {
@@ -44,5 +43,5 @@ fun ExecutionPlatform.deskImport(_name: String?) {
             }
         )
     }
-    printSuccess("エリアを追加しました [$fileName -> ${successList.size}]")
+    printSuccess("受付を追加しました [$fileName -> ${successList.size}]")
 }

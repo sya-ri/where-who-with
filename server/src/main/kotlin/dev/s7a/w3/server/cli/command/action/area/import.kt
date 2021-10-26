@@ -12,7 +12,6 @@ import dev.s7a.w3.server.database.table.Areas
 fun ExecutionPlatform.areaImport(_name: String?) {
     val fileName = _name ?: "areaList.csv"
     val list = importFromCsv(fileName)
-    println(list)
     val successList = mutableListOf<Int>()
     val errorList = mutableListOf<String>()
     useDatabaseOnce {
