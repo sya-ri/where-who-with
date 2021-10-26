@@ -12,20 +12,18 @@ import dev.s7a.w3.server.database.table.Areas
  */
 fun ExecutionPlatform.areaCreate(_name: String?) {
     checkAreaName(_name) { name ->
-        val area = useDatabaseOnce {
-            val notExist = Area.find { Areas.name eq name }.limit(1).empty()
-            if (notExist) {
-                Area.new {
-                    this.name = name
+        useDatabaseOnce {
+            when {
+                Area.find { Areas.name eq name }.limit(1).empty() -> {
+                    val area = Area.new {
+                        this.name = name
+                    }
+                    printSuccess("エリアを追加しました (id: ${area.id}, uuid: ${area.uuid}, name: ${area.name})")
                 }
-            } else {
-                null
+                else -> {
+                    printError(ErrorCode.OptionExist, "既に存在するエリア名です")
+                }
             }
-        }
-        if (area != null) {
-            printSuccess("エリアを追加しました (id: ${area.id}, uuid: ${area.uuid}, name: ${area.name})")
-        } else {
-            printError(ErrorCode.OptionExist, "既に存在するエリア名です")
         }
     }
 }

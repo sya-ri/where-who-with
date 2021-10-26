@@ -21,4 +21,9 @@ class User(id: EntityID<Int>) : IntEntity(id) {
      * 受付
      */
     var desk by Desk referencedOn Users.deskId
+
+    /**
+     * 受付ID
+     */
+    var deskId by Users.deskId
 }

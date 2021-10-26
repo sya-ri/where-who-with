@@ -9,23 +9,26 @@ import dev.s7a.w3.server.cli.command.action.desk.deskDelete
 import dev.s7a.w3.server.cli.command.action.desk.deskExport
 import dev.s7a.w3.server.cli.command.action.desk.deskImport
 import dev.s7a.w3.server.cli.command.action.desk.deskList
+import dev.s7a.w3.server.cli.command.action.log.logExport
+import dev.s7a.w3.server.cli.command.action.user.userExport
+import dev.s7a.w3.server.cli.command.action.user.userImport
 import dev.s7a.w3.server.cli.command.action.version
 import dev.s7a.w3.server.database.entity.Area
 import dev.s7a.w3.server.database.entity.Desk
+import dev.s7a.w3.server.database.entity.User
 import dev.s7a.w3.server.database.table.Areas
 import dev.s7a.w3.server.database.table.Desks
 import org.jetbrains.exposed.sql.transactions.transaction
 import util.cli.ExecutionTestPlatform
 import util.cli.assertExportCsv
-import util.cli.assertImportCsv
 import util.cli.assertPrintError
 import util.cli.assertPrintMessage
 import util.cli.assertPrintSuccess
 import util.random.randomString
 import util.setupTestDatabase
+import kotlin.random.Random
 import kotlin.test.BeforeTest
 import kotlin.test.Test
-import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
@@ -75,9 +78,15 @@ class CLITest {
 
     @Test
     fun `desk list can be imported`() {
-        assertImportCsv {
+        val name = randomString(16)
+        ExecutionTestPlatform.lastExitStatus = null
+        ExecutionTestPlatform.importData = listOf(mapOf("name" to name))
+        assertPrintSuccess {
             ExecutionTestPlatform.deskImport(null)
         }
+        transaction {
+            Desk.find { Desks.name eq name }.limit(1).firstOrNull()
+        }.run(::assertNotNull)
     }
 
     @Test
@@ -127,9 +136,15 @@ class CLITest {
 
     @Test
     fun `area list can be imported`() {
-        assertImportCsv {
+        val name = randomString(16)
+        ExecutionTestPlatform.lastExitStatus = null
+        ExecutionTestPlatform.importData = listOf(mapOf("name" to name))
+        assertPrintSuccess {
             ExecutionTestPlatform.areaImport(null)
         }
+        transaction {
+            Area.find { Areas.name eq name }.limit(1).firstOrNull()
+        }.run(::assertNotNull)
     }
 
     @Test
@@ -140,11 +155,36 @@ class CLITest {
     }
 
     @Test
+    fun `user list can be imported`() {
+        val id = Random.nextInt()
+        ExecutionTestPlatform.lastExitStatus = null
+        ExecutionTestPlatform.importData = listOf(mapOf("id" to "$id"))
+        assertPrintSuccess {
+            ExecutionTestPlatform.userImport(null)
+        }
+        transaction {
+            User.findById(id)
+        }.run(::assertNotNull)
+    }
+
+    @Test
+    fun `user list can be exported`() {
+        assertExportCsv {
+            ExecutionTestPlatform.userExport(null)
+        }
+    }
+
+    @Test
+    fun `log can be exported`() {
+        assertExportCsv {
+            ExecutionTestPlatform.logExport(null)
+        }
+    }
+
+    @Test
     fun `version can be printed`() {
-        val exception = assertPrintMessage {
+        assertPrintMessage {
             ExecutionTestPlatform.version()
         }
-        assertNotNull(exception.message)
-        assertFalse(exception.message.endsWith("null"))
     }
 }

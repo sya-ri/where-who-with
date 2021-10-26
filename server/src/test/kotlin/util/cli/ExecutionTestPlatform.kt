@@ -8,47 +8,50 @@ import dev.s7a.w3.server.cli.api.ExecutionPlatform
  */
 object ExecutionTestPlatform : ExecutionPlatform {
     /**
-     * [importFromCsv] を実行したことを表す例外
+     * 終了状態
      */
-    class ImportFromCsvException(val fileName: String) : Exception()
-
-    /**
-     * [exportToCsv] を実行したことを表す例外
-     */
-    class ExportToCsvException(val fileName: String, val data: List<List<Any?>>) : Exception()
-
-    /**
-     * [printMessage] を実行したことを表す例外
-     */
-    class PrintMessageException(message: String) : Exception(message)
-
-    /**
-     * [printSuccess] を実行したことを表す例外
-     */
-    class PrintSuccessException(message: String) : Exception(message)
+    enum class ExitStatus {
+        ImportFromCsv,
+        ExportToCsv,
+        PrintMessage,
+        PrintSuccess,
+        PrintError,
+    }
 
     /**
      * エラーで終了したことを表す例外
      */
     class PrintErrorException(val errorCode: ErrorCode, message: String) : Exception(message)
 
+    /**
+     * 最後の終了状態
+     */
+    var lastExitStatus: ExitStatus? = null
+
+    /**
+     * インポートに使うデータ
+     */
+    var importData: List<Map<String, String>>? = null
+
     override fun importFromCsv(fileName: String): List<Map<String, String>> {
-        throw ImportFromCsvException(fileName)
+        lastExitStatus = ExitStatus.ImportFromCsv
+        return importData.orEmpty()
     }
 
     override fun exportToCsv(fileName: String, data: List<List<Any?>>) {
-        throw ExportToCsvException(fileName, data)
+        lastExitStatus = ExitStatus.ExportToCsv
     }
 
     override fun printMessage(message: String) {
-        throw PrintMessageException(message)
+        lastExitStatus = ExitStatus.PrintMessage
     }
 
     override fun printSuccess(message: String) {
-        throw PrintSuccessException(message)
+        lastExitStatus = ExitStatus.PrintSuccess
     }
 
     override fun printError(errorCode: ErrorCode, message: String) {
+        lastExitStatus = ExitStatus.PrintError
         throw PrintErrorException(errorCode, message)
     }
 }
