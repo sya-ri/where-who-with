@@ -9,6 +9,8 @@ import dev.s7a.w3.server.cli.command.action.desk.deskDelete
 import dev.s7a.w3.server.cli.command.action.desk.deskExport
 import dev.s7a.w3.server.cli.command.action.desk.deskImport
 import dev.s7a.w3.server.cli.command.action.desk.deskList
+import dev.s7a.w3.server.cli.command.action.user.userExport
+import dev.s7a.w3.server.cli.command.action.user.userImport
 import dev.s7a.w3.server.cli.command.action.version
 import dev.s7a.w3.server.database.entity.Area
 import dev.s7a.w3.server.database.entity.Desk
@@ -136,6 +138,20 @@ class CLITest {
     fun `area list can be exported`() {
         assertExportCsv {
             ExecutionTestPlatform.areaExport(null)
+        }
+    }
+
+    @Test
+    fun `user list can be imported`() {
+        assertImportCsv {
+            ExecutionTestPlatform.userImport(null)
+        }
+    }
+
+    @Test
+    fun `user list can be exported`() {
+        assertExportCsv {
+            ExecutionTestPlatform.userExport(null)
         }
     }
 
