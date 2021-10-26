@@ -12,6 +12,7 @@ import dev.s7a.w3.server.cli.command.action.desk.deskDelete
 import dev.s7a.w3.server.cli.command.action.desk.deskExport
 import dev.s7a.w3.server.cli.command.action.desk.deskImport
 import dev.s7a.w3.server.cli.command.action.desk.deskList
+import dev.s7a.w3.server.cli.command.action.log.logExport
 import dev.s7a.w3.server.cli.command.action.start
 import dev.s7a.w3.server.cli.command.action.user.userExport
 import dev.s7a.w3.server.cli.command.action.user.userImport
@@ -41,6 +42,9 @@ fun executeCommand(args: Array<String>) {
         container("user", "ユーザーに関するコマンドです") {
             register("import", "ファイル名[.csv]", "CSVデータからユーザーを一括追加します", ExecutionPlatform::userImport)
             register("export", "ファイル名[.csv]", "ユーザーの一覧をCSVデータとして出力します", ExecutionPlatform::userExport)
+        }
+        container("log", "ログに関するコマンドです") {
+            register("export", "ファイル名[.csv]", "ログをCSVデータとして出力します", ExecutionPlatform::logExport)
         }
         register("version", "バージョンを表示します", ExecutionPlatform::version)
         interact("interact", "exit", "対話モードを開始します")
