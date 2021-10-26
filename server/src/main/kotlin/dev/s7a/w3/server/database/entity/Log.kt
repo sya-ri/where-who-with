@@ -18,9 +18,19 @@ class Log(id: EntityID<Int>) : IntEntity(id) {
     var user by User referencedOn Logs.userId
 
     /**
+     * ユーザーID
+     */
+    var userId by Logs.userId
+
+    /**
      * エリア
      */
     var area by Area referencedOn Logs.areaId
+
+    /**
+     * エリアID
+     */
+    var areaId by Logs.areaId
 
     /**
      * エリアに入った日時

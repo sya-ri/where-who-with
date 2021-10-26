@@ -10,9 +10,9 @@ import dev.s7a.w3.server.database.entity.Log
 fun ExecutionPlatform.logExport(_name: String?) {
     val fileName = _name ?: "log.csv"
     val list = listOf(listOf("user_id", "area_id", "joinedAt", "leaveAt")) + useDatabaseOnce {
-        Log.all().toList().map {
-            listOf(it.user.id.value, it.area.id.value, it.joinedAt, it.leaveAt)
-        }
+        Log.all().toList()
+    }.map {
+        listOf(it.userId, it.areaId, it.joinedAt, it.leaveAt)
     }
     exportToCsv(fileName, list)
 }

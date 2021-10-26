@@ -10,9 +10,9 @@ import dev.s7a.w3.server.database.entity.User
 fun ExecutionPlatform.userExport(_name: String?) {
     val fileName = _name ?: "userList.csv"
     val list = listOf(listOf("id", "desk_id", "uuid")) + useDatabaseOnce {
-        User.all().toList().map {
-            listOf(it.id.value, it.desk.id.value, it.uuid)
-        }
+        User.all().toList()
+    }.map {
+        listOf(it.id.value, it.deskId, it.uuid)
     }
     exportToCsv(fileName, list)
 }
