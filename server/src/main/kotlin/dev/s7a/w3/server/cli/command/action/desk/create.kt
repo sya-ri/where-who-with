@@ -12,20 +12,18 @@ import dev.s7a.w3.server.database.table.Desks
  */
 fun ExecutionPlatform.deskCreate(_name: String?) {
     checkDeskName(_name) { name ->
-        val desk = useDatabaseOnce {
-            val notExist = Desk.find { Desks.name eq name }.limit(1).empty()
-            if (notExist) {
-                Desk.new {
-                    this.name = name
+        useDatabaseOnce {
+            when {
+                Desk.find { Desks.name eq name }.limit(1).empty() -> {
+                    val desk = Desk.new {
+                        this.name = name
+                    }
+                    printSuccess("受付を追加しました (id: ${desk.id}, uuid: ${desk.uuid}, name: ${desk.name})")
                 }
-            } else {
-                null
+                else -> {
+                    printError(ErrorCode.OptionExist, "既に存在する受付名です")
+                }
             }
-        }
-        if (desk != null) {
-            printSuccess("受付を追加しました (id: ${desk.id}, uuid: ${desk.uuid}, name: ${desk.name})")
-        } else {
-            printError(ErrorCode.OptionExist, "既に存在する受付名です")
         }
     }
 }
