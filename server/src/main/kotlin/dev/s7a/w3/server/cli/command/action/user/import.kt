@@ -47,6 +47,9 @@ fun ExecutionPlatform.userImport(_name: String?) {
                     else -> {
                         User.new(id) {
                             this.desk = desk
+                            if (uuid != null) {
+                                this.uuid = uuid
+                            }
                         }
                         successList.add(index)
                     }

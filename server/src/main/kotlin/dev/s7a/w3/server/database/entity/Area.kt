@@ -15,7 +15,7 @@ class Area(id: EntityID<Int>) : IntEntity(id) {
     /**
      * 識別子名
      */
-    val uuid by Areas.uuid
+    var uuid by Areas.uuid
 
     /**
      * エリア名

@@ -41,6 +41,9 @@ fun ExecutionPlatform.areaImport(_name: String?) {
                     else -> {
                         Area.new(id) {
                             this.name = name
+                            if (uuid != null) {
+                                this.uuid = uuid
+                            }
                         }
                         successList.add(index)
                     }
