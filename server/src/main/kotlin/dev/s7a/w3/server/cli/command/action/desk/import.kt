@@ -39,8 +39,11 @@ fun ExecutionPlatform.deskImport(_name: String?) {
                         errorList.add("${index + 1}: uuid=$uuid は既に存在しています")
                     }
                     else -> {
-                        Desk.new {
+                        Desk.new(id) {
                             this.name = name
+                            if (uuid != null) {
+                                this.uuid = uuid
+                            }
                         }
                         successList.add(index)
                     }

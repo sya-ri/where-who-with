@@ -15,7 +15,7 @@ class User(id: EntityID<Int>) : IntEntity(id) {
     /**
      * 識別子名
      */
-    val uuid by Users.uuid
+    var uuid by Users.uuid
 
     /**
      * 受付
