@@ -13,7 +13,7 @@ interface Props {
 
 const DeskViewPage: FC<Props> = (props) => {
   const { uuid, userUuid, userId } = props;
-  const url = getCurrentUrl() + Paths.User(uuid);
+  const url = getCurrentUrl() + Paths.User(userUuid);
   const componentRef = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
