@@ -40,7 +40,7 @@ const IndexPage: FC = () => (
         残っていなければ &quot;QRコードを失くしてしまった&quot; をご覧ください。
       </DocsSubSection>
       <DocsSubSection title="QRコードを失くしてしまった" icon={QrCodeIcon}>
-        受付 もしくは 本部 に行ってください。ID があれば再発行が可能です。
+        体育教官室前受付 に行ってください。ID があれば再発行が可能です。
       </DocsSubSection>
     </DocsSection>
   </DocsTemplate>
